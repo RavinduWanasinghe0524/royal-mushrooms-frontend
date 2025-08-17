@@ -103,7 +103,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 font-inter text-gray-800 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-100 font-inter text-gray-900 flex flex-col relative overflow-hidden">
       {/* Custom styles and animations moved here or defined in a global CSS file in a real Next.js app */}
       <style>{`
         /* Custom animations */
@@ -131,10 +131,24 @@ const Home = () => {
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
       `}</style>
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+        <div className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full blur-xl animate-pulse-subtle"></div>
+        <div className="absolute top-32 right-20 w-16 h-16 bg-emerald-200 rounded-full blur-lg animate-pulse-subtle" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-green-300 rounded-full blur-2xl animate-pulse-subtle" style={{animationDelay: '2s'}}></div>
+      </div>
+      
       {/* Header */}
-      <header className="bg-green-700 text-white p-4 shadow-lg rounded-b-3xl relative z-10">
-        <div className="container mx-auto flex justify-between items-center px-4 py-2">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Royal Mushrooms 🍄</h1>
+      <header className="bg-gradient-to-r from-green-700 via-green-600 to-emerald-700 text-white p-4 shadow-2xl backdrop-blur-sm relative z-10 border-b border-green-500/20">
+        <div className="container mx-auto flex justify-between items-center px-4 py-3">
+          <div className="flex items-center space-x-3 animate-slide-in-left">
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-2xl font-bold text-green-900 shadow-lg animate-pulse-subtle">
+              🍄
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight gradient-text-white">
+              Royal Mushrooms
+            </h1>
+          </div>
           <div className="flex space-x-3 sm:space-x-4">
             {/* Consultance Button */}
             <button
@@ -252,61 +266,152 @@ const Home = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-emerald-700 text-white py-16 sm:py-24 text-center shadow-inner relative overflow-hidden">
-        <div className="absolute inset-0 bg-pattern opacity-10"></div> {/* Subtle pattern overlay */}
+      <section className="bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 text-white py-20 sm:py-32 text-center shadow-2xl relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse-subtle"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-28 h-28 bg-yellow-200 rounded-full blur-2xl animate-pulse-subtle" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-1/2 right-1/3 w-20 h-20 bg-green-200 rounded-full blur-xl animate-pulse-subtle" style={{animationDelay: '3s'}}></div>
+        </div>
+        
         <div className="container mx-auto px-6 relative z-10">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 animate-fade-in-down">
-            Freshly Harvested Mushrooms, Delivered to Your Door
-          </h2>
-          <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-8 opacity-90 animate-fade-in-up">
-            Discover a world of flavor with our premium selection of organic and wild-foraged fungi.
-          </p>
-          <button className="px-8 py-4 bg-yellow-400 text-green-900 font-bold text-lg rounded-full shadow-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 button-hover-effect">
-            Shop Now!
-          </button>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 animate-fade-in-down bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent leading-tight">
+              Freshly Harvested Premium Mushrooms
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mb-6 rounded-full animate-fade-in"></div>
+            <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-12 opacity-95 animate-fade-in-up leading-relaxed">
+              Discover a world of flavor with our exquisite selection of organic and sustainably wild-foraged fungi, delivered fresh to your door.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{animationDelay: '0.3s'}}>
+              <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-green-900 font-bold text-lg rounded-full shadow-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 button-hover-effect">
+                🛒 Shop Now
+              </button>
+              <button className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-full shadow-lg hover:bg-white hover:text-green-600 transition-all duration-300 transform hover:scale-105 button-hover-effect">
+                🍄 Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Decorative wave at bottom */}
+        <div className="absolute bottom-0 left-0 w-full">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 120L1440 120L1440 0C1440 0 1080 80 720 40C360 0 0 40 0 40V120Z" fill="rgb(248, 250, 252)" fillOpacity="0.8"/>
+          </svg>
         </div>
       </section>
 
       {/* Main content */}
-      <main className="container mx-auto p-6 flex-grow">
-        <h2 className="text-4xl font-extrabold text-green-900 mb-10 text-center sm:text-left">
-          Our Exquisite Selection
-        </h2>
+      <main className="container mx-auto p-6 flex-grow relative">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-extrabold text-green-900 mb-4 animate-fade-in">
+            Our <span className="gradient-text">Exquisite</span> Selection
+          </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-green-500 to-emerald-600 mx-auto mb-6 rounded-full animate-fade-in"></div>
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto animate-fade-in-up">
+            Each mushroom is carefully selected and harvested at peak freshness to deliver the ultimate culinary experience.
+          </p>
+        </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+          {products.map((product, index) => (
             <div
               key={product.id}
-              className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between product-card cursor-pointer"
+              className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between product-card cursor-pointer border border-gray-100 hover:border-green-200 animate-fade-in"
+              style={{animationDelay: `${index * 0.1}s`}}
             >
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="w-full h-48 object-cover rounded-t-2xl border-b-2 border-green-100"
-                onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/400x300/F0F8FF/000?text=Image+Error"; }}
-              />
-              <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-2xl font-semibold text-green-800 mb-2">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-3 flex-grow">
-                  {product.description}
-                </p>
-                <div className="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
-                  <span className="text-3xl font-bold text-green-900">
-                    {formatPrice(product.price)}
-                  </span>
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="px-6 py-3 bg-green-500 text-white rounded-full font-bold hover:bg-green-600 transition-all duration-300 transform hover:scale-105 shadow-lg button-hover-effect"
-                  >
-                    Add to Cart
-                  </button>
+              <div className="relative overflow-hidden">
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                    Fresh
+                  </div>
+                </div>
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500 border-b-4 border-gradient-to-r from-green-200 to-emerald-200"
+                  onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/400x300/F0F8FF/000?text=Image+Error"; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              
+              <div className="p-6 flex-grow flex flex-col">
+                <div className="mb-4">
+                  <h3 className="text-2xl font-bold text-green-800 mb-2 group-hover:text-green-600 transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+                    {product.description}
+                  </p>
+                </div>
+                
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-sm text-gray-500">Starting at</span>
+                    </div>
+                    <div className="flex text-yellow-400">
+                      {'★'.repeat(5)}
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="flex flex-col">
+                      <span className="text-3xl font-black text-green-900 bg-gradient-to-r from-green-800 to-emerald-800 bg-clip-text text-transparent">
+                        {formatPrice(product.price)}
+                      </span>
+                      <span className="text-xs text-gray-500">per 250g</span>
+                    </div>
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl font-bold hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl button-hover-effect overflow-hidden group"
+                    >
+                      <span className="relative z-10 flex items-center space-x-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <span>Add to Cart</span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* Trust indicators */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 py-12 border-t border-gray-200">
+          <div className="text-center animate-fade-in-up">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🚚</span>
+            </div>
+            <h4 className="font-bold text-green-800 mb-2">Free Delivery</h4>
+            <p className="text-sm text-gray-600">Orders over LKR 500</p>
+          </div>
+          <div className="text-center animate-fade-in-up" style={{animationDelay: '0.1s'}}>
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🌱</span>
+            </div>
+            <h4 className="font-bold text-green-800 mb-2">100% Organic</h4>
+            <p className="text-sm text-gray-600">Sustainably grown</p>
+          </div>
+          <div className="text-center animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">❄️</span>
+            </div>
+            <h4 className="font-bold text-green-800 mb-2">Fresh Daily</h4>
+            <p className="text-sm text-gray-600">Harvested to order</p>
+          </div>
+          <div className="text-center animate-fade-in-up" style={{animationDelay: '0.3s'}}>
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🏆</span>
+            </div>
+            <h4 className="font-bold text-green-800 mb-2">Premium Quality</h4>
+            <p className="text-sm text-gray-600">Hand-selected</p>
+          </div>
         </div>
       </main>
 
