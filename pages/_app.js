@@ -1,10 +1,11 @@
 // pages/_app.js
 import '../styles/globals.css'; // This imports your Tailwind CSS and custom styles
 import Head from 'next/head'; // Import Next.js Head component for managing <head> content
+import { LanguageProvider } from '../contexts/LanguageContext';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <LanguageProvider>
       {/* Head component to add meta tags, link tags for fonts etc. */}
       <Head>
         {/* Link to Google Fonts to load the 'Inter' font */}
@@ -12,7 +13,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       {/* This renders the actual page component (e.g., Home from index.js) */}
       <Component {...pageProps} />
-    </>
+    </LanguageProvider>
   );
 }
 

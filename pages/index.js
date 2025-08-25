@@ -1,61 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useLanguage } from '../contexts/LanguageContext';
+import ConsultationBooking from '../components/ConsultationBooking';
+import WhatsAppChat from '../components/WhatsAppChat';
+import MembershipModal from '../components/MembershipModal';
+import CheckoutModal from '../components/CheckoutModal';
+import UserProfile from '../components/UserProfile';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 // Main Next.js Page Component (conventionally named 'Home' for pages/index.js)
 const Home = () => {
-  // Sample mushroom data with slightly more appealing placeholder images
-  const [products] = useState([
+  const { t, language } = useLanguage();
+  
+  // Static product data with translation keys
+  const productData = [
     {
       id: 1,
-      name: 'Forest Shiitake',
+      nameKey: 'forestShiitake',
       price: 12.99,
-      description: 'Rich, umami flavor. Perfect for stir-fries and hearty soups. Hand-picked from sustainable farms.',
+      descriptionKey: 'shiitakeDesc',
       imageUrl: 'https://placehold.co/400x300/e6e0d3/36454F?text=Shiitake',
+      isPremiumOnly: false,
     },
     {
       id: 2,
-      name: 'Pearl Oyster Mushrooms',
+      nameKey: 'pearlOyster',
       price: 10.50,
-      description: 'Delicate, tender texture with a subtle, savory taste. Ideal for sautéing or as a seafood alternative.',
+      descriptionKey: 'oysterDesc',
       imageUrl: 'https://placehold.co/400x300/d3e6e0/36454F?text=Oyster',
+      isPremiumOnly: false,
     },
     {
       id: 3,
-      name: 'Giant Portobello Caps',
+      nameKey: 'portobello',
       price: 8.75,
-      description: 'Meaty, robust flavor. Excellent grilled, roasted, or stuffed as a vegetarian main course.',
+      descriptionKey: 'portobelloDesc',
       imageUrl: 'https://placehold.co/400x300/e0d3e6/36454F?text=Portobello',
+      isPremiumOnly: false,
     },
     {
       id: 4,
-      name: 'Royal Lion\'s Mane',
+      nameKey: 'lionsMane',
       price: 15.00,
-      description: 'Unique, crab-like texture with a mild, sweet flavor. Known for cognitive benefits.',
+      descriptionKey: 'lionsManeDesc',
       imageUrl: 'https://placehold.co/400x300/d3e0e6/36454F?text=Royal+Lions+Mane',
+      isPremiumOnly: true,
     },
     {
       id: 5,
-      name: 'Golden Chanterelles',
+      nameKey: 'chanterelles',
       price: 18.00,
-      description: 'Fruity aroma and peppery undertones. A gourmet favorite for risottos and pasta dishes.',
+      descriptionKey: 'chanterellesDesc',
       imageUrl: 'https://placehold.co/400x300/e6d3e0/36454F?text=Chanterelle',
+      isPremiumOnly: true,
     },
-  ]);
+    {
+      id: 6,
+      nameKey: 'blackTruffle',
+      price: 99.99,
+      descriptionKey: 'truffleDesc',
+      imageUrl: 'https://placehold.co/400x300/2d1810/f0f0f0?text=Black+Truffle',
+      isPremiumOnly: true,
+    },
+  ];
+  
+  // Products with current translations
+  const products = productData.map(product => ({
+    ...product,
+    name: t(product.nameKey),
+    description: t(product.descriptionKey),
+  }));
 
   // State for the shopping cart
   const [cart, setCart] = useState([]);
   // State for controlling cart visibility
   const [isCartOpen, setIsCartOpen] = useState(false);
-  // State for controlling profile/auth modal visibility (now just a placeholder profile)
+  // State for controlling profile/auth modal visibility
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  // State for controlling admin panel modal visibility (now just a placeholder admin panel)
-  const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
-  // State for controlling consultance modal visibility
-  const [isConsultanceOpen, setIsConsultanceOpen] = useState(false);
+  // State for controlling consultation modal visibility
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  // State for controlling live chat visibility
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  // State for controlling membership modal visibility
+  const [isMembershipOpen, setIsMembershipOpen] = useState(false);
+  // State for current user
+  const [currentUser, setCurrentUser] = useState(null);
+  // State for login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // For frontend-only, we simulate a logged-in state or always consider it "logged out"
-  // You can toggle this boolean for testing UI states.
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulate login state
-  const [isSimulatedAdmin, setIsSimulatedAdmin] = useState(false); // Simulate admin state
+  // Load user data on component mount
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      setCurrentUser(user);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  // Check if user has active membership
+  const hasPremiumAccess = () => {
+    if (!currentUser) return false;
+    if (!currentUser.hasMembership) return false;
+    if (!currentUser.membershipExpiry) return false;
+    
+    const expiryDate = new Date(currentUser.membershipExpiry);
+    return expiryDate > new Date();
+  };
 
 
   // Function to add a product to the cart
@@ -146,93 +197,92 @@ const Home = () => {
               🍄
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight gradient-text-white">
-              Royal Mushrooms
+              {t('royalMushrooms')}
             </h1>
           </div>
-          <div className="flex space-x-3 sm:space-x-4">
-            {/* Consultance Button */}
+          <div className="flex space-x-2 sm:space-x-3">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
+            {/* Consultation Button */}
             <button
-              onClick={() => setIsConsultanceOpen(!isConsultanceOpen)}
-              className="px-4 sm:px-5 py-2 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-full shadow-md flex items-center space-x-2 text-sm sm:text-base button-hover-effect"
+              onClick={() => setIsConsultationOpen(true)}
+              className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 sm:h-6 sm:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8.228 9.228a4.5 4.5 0 110 5.544M15.772 9.228a4.5 4.5 0 100 5.544M11.996 6.5h.005M11.996 17.5h.005L12 21a1 1 0 01-1 1H4a1 1 0 01-1-1v-6a1 1 0 011-1h7a1 1 0 011 1v4"
-                />
+              <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
-              <span className="hidden sm:inline">Consultance</span>
+              <span className="hidden sm:inline">Consultation</span>
             </button>
 
-            {/* Admin Panel Button (visible only if isSimulatedAdmin is true) */}
-            {isSimulatedAdmin && (
+            {/* Live Chat Button - Only for premium members */}
+            {hasPremiumAccess() && (
               <button
-                onClick={() => setIsAdminPanelOpen(!isAdminPanelOpen)}
-                className="px-4 sm:px-5 py-2 bg-purple-600 hover:bg-purple-800 transition duration-300 rounded-full shadow-md flex items-center space-x-2 text-sm sm:text-base button-hover-effect"
+                onClick={() => setIsChatOpen(true)}
+                className="px-3 sm:px-4 py-2 bg-indigo-600 hover:bg-indigo-800 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.262 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
+                <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <span className="hidden sm:inline">Admin Panel</span>
+                <span className="hidden sm:inline">Live Chat</span>
               </button>
             )}
 
-            {/* Profile/Auth Button - now just Profile/Toggle Login */}
+            {/* Membership Button */}
             <button
-              onClick={() => {
-                setIsProfileOpen(!isProfileOpen);
-                // Simple toggle for isLoggedIn state for demo purposes
-                // In a real app, this would be tied to actual login/logout
-                if (!isProfileOpen) {
-                  // Only toggle if opening the profile modal
-                  setIsLoggedIn(!isLoggedIn);
-                  // Simulate admin state toggle too
-                  setIsSimulatedAdmin(!isSimulatedAdmin);
-                }
-              }}
-              className="px-4 sm:px-5 py-2 bg-green-600 hover:bg-green-800 transition duration-300 rounded-full shadow-md flex items-center space-x-2 text-sm sm:text-base button-hover-effect"
+              onClick={() => setIsMembershipOpen(true)}
+              className={`px-3 sm:px-4 py-2 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect ${
+                hasPremiumAccess() 
+                  ? 'bg-yellow-500 hover:bg-yellow-600 text-yellow-900' 
+                  : 'bg-purple-600 hover:bg-purple-800 text-white'
+              }`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 sm:h-6 sm:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
+              <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span className="hidden sm:inline">{isLoggedIn ? 'Profile' : 'Login Demo'}</span>
+              <span className="hidden sm:inline">
+                {hasPremiumAccess() ? 'Premium' : 'Membership'}
+              </span>
             </button>
+
+            {/* Admin Dashboard Link - Only for admins */}
+            {currentUser?.type === 'admin' && (
+              <Link href="/admin/dashboard">
+                <button className="px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-800 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  <span className="hidden sm:inline">Admin</span>
+                </button>
+              </Link>
+            )}
+
+            {/* Profile/Auth Button */}
+            {isLoggedIn ? (
+              <div className="relative">
+                <button
+                  onClick={() => setIsProfileOpen(true)}
+                  className="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-800 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect"
+                >
+                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold">{currentUser?.name?.charAt(0) || 'U'}</span>
+                  </div>
+                  <span className="hidden sm:inline">{currentUser?.name || 'User'}</span>
+                  {hasPremiumAccess() && (
+                    <span className="text-yellow-300 text-xs">💎</span>
+                  )}
+                </button>
+              </div>
+            ) : (
+              <Link href="/auth/login">
+                <button className="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-800 transition duration-300 rounded-full shadow-md flex items-center space-x-1 sm:space-x-2 text-sm button-hover-effect">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  </svg>
+                  <span className="hidden sm:inline">Login</span>
+                </button>
+              </Link>
+            )}
 
             {/* Cart Button */}
             <button
@@ -277,17 +327,29 @@ const Home = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 animate-fade-in-down bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent leading-tight">
-              Freshly Harvested Premium Mushrooms
+              {t('heroTitle')}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mb-6 rounded-full animate-fade-in"></div>
             <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-12 opacity-95 animate-fade-in-up leading-relaxed">
-              Discover a world of flavor with our exquisite selection of organic and sustainably wild-foraged fungi, delivered fresh to your door.
+              {t('heroSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{animationDelay: '0.3s'}}>
-              <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-green-900 font-bold text-lg rounded-full shadow-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 button-hover-effect">
+              <button 
+                onClick={() => {
+                  const productsSection = document.getElementById('products-section');
+                  productsSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-green-900 font-bold text-lg rounded-full shadow-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 button-hover-effect"
+              >
                 🛒 Shop Now
               </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-full shadow-lg hover:bg-white hover:text-green-600 transition-all duration-300 transform hover:scale-105 button-hover-effect">
+              <button 
+                onClick={() => {
+                  const aboutSection = document.getElementById('about-section');
+                  aboutSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-full shadow-lg hover:bg-white hover:text-green-600 transition-all duration-300 transform hover:scale-105 button-hover-effect"
+              >
                 🍄 Learn More
               </button>
             </div>
@@ -315,7 +377,7 @@ const Home = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+        <div id="products-section" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
           {products.map((product, index) => (
             <div
               key={product.id}
@@ -383,7 +445,7 @@ const Home = () => {
         </div>
         
         {/* Trust indicators */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 py-12 border-t border-gray-200">
+        <div id="about-section" className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 py-12 border-t border-gray-200">
           <div className="text-center animate-fade-in-up">
             <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🚚</span>
@@ -497,167 +559,44 @@ const Home = () => {
         </div>
       )}
 
-      {/* User Profile / Auth Modal (Frontend only, simplified) */}
-      {isProfileOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start pt-10 sm:pt-20 z-50 animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-lg relative max-h-[90vh] overflow-y-auto transform scale-95 animate-scale-in">
-            <button
-              onClick={() => setIsProfileOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition duration-200"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <h2 className="text-3xl font-bold text-green-800 mb-6 border-b pb-4">
-              User Profile (Frontend Demo)
-            </h2>
-            <div className="space-y-6">
-              <p className="text-gray-700">
-                This is a simulated user profile page. Without a backend, user data is not stored or loaded.
-              </p>
-              {isLoggedIn ? (
-                <button
-                  onClick={() => {
-                    setIsLoggedIn(false);
-                    setIsSimulatedAdmin(false);
-                    setIsProfileOpen(false);
-                  }}
-                  className="w-full py-3 mt-4 bg-red-500 text-white font-bold text-lg rounded-xl hover:bg-red-600 transition duration-300 shadow-lg transform hover:scale-[1.01] button-hover-effect"
-                >
-                  Simulate Logout
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    setIsLoggedIn(true);
-                    // You can optionally make this button also toggle admin status for testing
-                    // setIsSimulatedAdmin(true);
-                    setIsProfileOpen(false);
-                  }}
-                  className="w-full py-4 bg-green-600 text-white font-bold text-xl rounded-xl hover:bg-green-700 transition duration-300 shadow-lg transform hover:scale-[1.01] button-hover-effect"
-                >
-                  Simulate Login
-                </button>
-              )}
-              <button
-                onClick={() => setIsSimulatedAdmin(!isSimulatedAdmin)}
-                className="w-full py-3 mt-4 bg-purple-500 text-white font-bold text-lg rounded-xl hover:bg-purple-600 transition duration-300 shadow-lg transform hover:scale-[1.01] button-hover-effect"
-              >
-                Toggle Admin View (for demo)
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* User Profile Modal */}
+      <UserProfile 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={currentUser}
+        onUserUpdate={(updatedUser) => {
+          setCurrentUser(updatedUser);
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+        }}
+      />
 
-      {/* Admin Panel Modal (Frontend only, simplified) */}
-      {isAdminPanelOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start pt-10 sm:pt-20 z-50 animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-lg relative max-h-[90vh] overflow-y-auto transform scale-95 animate-scale-in">
-            <button
-              onClick={() => setIsAdminPanelOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition duration-200"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <h2 className="text-3xl font-bold text-purple-800 mb-6 border-b pb-4">
-              Admin Panel (Frontend Demo) 🛠️
-            </h2>
-            <div className="space-y-4">
-              <p className="text-gray-700">
-                Welcome, **Admin**! This is a simulated admin panel. Without a backend, product or order management features are not functional.
-              </p>
-              <p className="text-gray-600">
-                You could imagine features like:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 ml-4 space-y-2">
-                <li>Manage Product Inventory</li>
-                <li>View Customer Orders</li>
-                <li>User Management</li>
-              </ul>
-              <p className="text-sm text-gray-500 mt-6">
-                (To make these functional, you would integrate a backend like Firebase Firestore or a custom API.)
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Consultation Booking Modal */}
+      <ConsultationBooking 
+        isOpen={isConsultationOpen} 
+        onClose={() => setIsConsultationOpen(false)}
+      />
 
-      {/* Consultance Modal */}
-      {isConsultanceOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start pt-10 sm:pt-20 z-50 animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-lg relative max-h-[90vh] overflow-y-auto transform scale-95 animate-scale-in">
-            <button
-              onClick={() => setIsConsultanceOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition duration-200"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <h2 className="text-3xl font-bold text-blue-800 mb-6 border-b pb-4">
-              Mushroom Consultation 🍄
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Welcome to **Royal Mushrooms Consultation**! Do you have questions about specific mushroom varieties, their culinary uses, health benefits, or how to grow them? Our experts are here to help.
-              </p>
-              <p>
-                We offer personalized advice to help you get the most out of your mushroom experience.
-              </p>
-              <h3 className="text-xl font-semibold text-blue-700 mt-6">How to get a consultation:</h3>
-              <ul className="list-disc list-inside ml-4 space-y-2">
-                <li>**Email Us:** Send your questions to <a href="mailto:consult@royalmushrooms.com" className="text-blue-500 hover:underline">consult@royalmushrooms.com</a>.</li>
-                <li>**Book a Call:** Schedule a one-on-one session with our mushroom specialists via our booking portal (coming soon!).</li>
-                <li>**FAQ Section:** Check out our comprehensive FAQ for quick answers to common questions.</li>
-              </ul>
-              <p className="text-sm text-gray-500 mt-6">
-                We aim to respond to all email inquiries within 24-48 hours.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* WhatsApp Chat Modal */}
+      <WhatsAppChat 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)}
+        user={currentUser || { name: 'Guest User', id: 'guest' }}
+      />
+
+      {/* Membership Modal */}
+      <MembershipModal
+        isOpen={isMembershipOpen}
+        onClose={() => setIsMembershipOpen(false)}
+        user={currentUser}
+        onMembershipUpdate={(updatedUser) => {
+          setCurrentUser(updatedUser);
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+        }}
+      />
 
       {/* Footer */}
       <footer className="bg-green-900 text-white p-4 text-center mt-auto rounded-t-3xl shadow-inner">
-        <p>&copy; 2023 Royal Mushrooms. All rights reserved.</p>
+        <p>&copy; 2024 Royal Mushrooms. All rights reserved.</p>
       </footer>
     </div>
   );
