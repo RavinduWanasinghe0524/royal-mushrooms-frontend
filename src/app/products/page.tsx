@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ShoppingCart, Star, Filter } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 const allProducts = [
   {
@@ -13,7 +14,7 @@ const allProducts = [
     name: 'Forest Shiitake',
     description: 'Rich, umami flavor. Perfect for stir-fries and hearty soups.',
     price: 899,
-    image: '🍄',
+    image: '/images/shiitake.svg',
     category: 'Exotic',
     rating: 4.8,
   },
@@ -22,7 +23,7 @@ const allProducts = [
     name: 'Pearl Oyster Mushrooms',
     description: 'Delicate, tender texture with a subtle, savory taste.',
     price: 749,
-    image: '🍄',
+    image: '/images/oyster.svg',
     category: 'Gourmet',
     rating: 4.6,
   },
@@ -31,7 +32,7 @@ const allProducts = [
     name: 'Giant Portobello Caps',
     description: 'Meaty, robust flavor. Excellent grilled or roasted.',
     price: 999,
-    image: '🍄',
+    image: '/images/portobello.svg',
     category: 'Classic',
     rating: 4.9,
   },
@@ -40,7 +41,7 @@ const allProducts = [
     name: "Royal Lion's Mane",
     description: 'Unique texture with cognitive benefits.',
     price: 1299,
-    image: '🦁',
+    image: '/images/shiitake.svg',
     category: 'Premium',
     rating: 5.0,
   },
@@ -49,7 +50,7 @@ const allProducts = [
     name: 'Golden Chanterelles',
     description: 'Fruity aroma and peppery undertones.',
     price: 1499,
-    image: '⭐',
+    image: '/images/oyster.svg',
     category: 'Premium',
     rating: 4.9,
   },
@@ -58,7 +59,7 @@ const allProducts = [
     name: 'Premium Black Truffle',
     description: 'The crown jewel of fungi.',
     price: 4999,
-    image: '💎',
+    image: '/images/portobello.svg',
     category: 'Luxury',
     rating: 5.0,
   },
@@ -67,7 +68,7 @@ const allProducts = [
     name: 'White Button Mushrooms',
     description: 'Versatile and mild-flavored classic.',
     price: 499,
-    image: '🍄',
+    image: '/images/shiitake.svg',
     category: 'Classic',
     rating: 4.3,
   },
@@ -76,7 +77,7 @@ const allProducts = [
     name: 'Crimini Mushrooms',
     description: 'Baby portobellos with rich flavor.',
     price: 599,
-    image: '🍄',
+    image: '/images/portobello.svg',
     category: 'Classic',
     rating: 4.5,
   },
@@ -158,9 +159,14 @@ function ProductCard({ product, index }: { product: any; index: number }) {
     >
       <motion.div
         whileHover={{ scale: 1.1, rotate: 5 }}
-        className="text-6xl text-center mb-4"
+        className="relative w-full h-32 mb-4"
       >
-        {product.image}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-contain"
+        />
       </motion.div>
 
       <div className="space-y-3">

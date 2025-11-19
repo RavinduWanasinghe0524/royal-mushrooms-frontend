@@ -17,7 +17,7 @@ export default function MembershipPage() {
         'Email support',
         'Monthly newsletter',
       ],
-      color: 'from-neutral-400 to-neutral-600',
+      color: 'from-gray-400 to-gray-600',
     },
     {
       name: 'Premium',
@@ -31,7 +31,7 @@ export default function MembershipPage() {
         'Access to exclusive products',
         'Monthly expert consultation',
       ],
-      color: 'from-primary-400 to-primary-600',
+      color: 'from-cyan-400 to-cyan-600',
       popular: true,
     },
     {
@@ -47,7 +47,7 @@ export default function MembershipPage() {
         'Weekly consultations',
         'Exclusive events & tastings',
       ],
-      color: 'from-accent-400 to-accent-600',
+      color: 'from-purple-400 to-purple-600',
     },
   ];
 
@@ -78,12 +78,12 @@ export default function MembershipPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`cyber-card rounded-2xl p-8 relative ${
-                  plan.popular ? 'ring-2 ring-primary-500 md:scale-105' : ''
+                  plan.popular ? 'ring-2 ring-cyan-500 md:scale-105' : ''
                 }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <span className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                    <span className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                       MOST POPULAR
                     </span>
                   </div>
@@ -105,7 +105,7 @@ export default function MembershipPage() {
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start space-x-3">
-                      <Check className="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" />
+                      <Check className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
                       <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
@@ -116,8 +116,8 @@ export default function MembershipPage() {
                   whileTap={{ scale: 0.98 }}
                   className={`w-full py-4 rounded-lg font-semibold transition-all ${
                     plan.popular
-                      ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/50'
-                      : 'glass text-white hover:bg-primary-500/10 border border-primary-500/30'
+                      ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg shadow-cyan-500/50'
+                      : 'glass text-white hover:bg-cyan-500/10 border border-cyan-500/30'
                   }`}
                 >
                   {plan.price === 0 ? 'Get Started' : 'Subscribe Now'}

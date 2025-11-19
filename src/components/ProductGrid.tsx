@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ShoppingCart, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 interface Product {
   id: number;
@@ -20,42 +21,42 @@ const products: Product[] = [
     name: 'Forest Shiitake',
     description: 'Rich, umami flavor. Perfect for stir-fries and hearty soups. Hand-picked from sustainable farms.',
     price: 899,
-    image: '🍄',
+    image: '/images/shiitake.svg',
   },
   {
     id: 2,
     name: 'Pearl Oyster Mushrooms',
     description: 'Delicate, tender texture with a subtle, savory taste. Ideal for sautéing or as a seafood alternative.',
     price: 749,
-    image: '🍄',
+    image: '/images/oyster.svg',
   },
   {
     id: 3,
     name: 'Giant Portobello Caps',
     description: 'Meaty, robust flavor. Excellent grilled, roasted, or stuffed as a vegetarian main course.',
     price: 999,
-    image: '🍄',
+    image: '/images/portobello.svg',
   },
   {
     id: 4,
     name: "Royal Lion's Mane",
     description: "Unique, crab-like texture with a mild, sweet flavor. Known for cognitive benefits.",
     price: 1299,
-    image: '🦁',
+    image: '/images/shiitake.svg',
   },
   {
     id: 5,
     name: 'Golden Chanterelles',
     description: 'Fruity aroma and peppery undertones. A gourmet favorite for risottos and pasta dishes.',
     price: 1499,
-    image: '⭐',
+    image: '/images/oyster.svg',
   },
   {
     id: 6,
     name: 'Premium Black Truffle',
     description: 'The crown jewel of fungi. Exquisite flavor and aroma. Available only to premium members.',
     price: 4999,
-    image: '💎',
+    image: '/images/portobello.svg',
     premium: true,
   },
 ];
@@ -123,9 +124,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           scale: isHovered ? 1.1 : 1,
           rotate: isHovered ? 5 : 0 
         }}
-        className="text-8xl mb-6 text-center"
+        className="relative w-full h-48 mb-6"
       >
-        {product.image}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-contain"
+        />
       </motion.div>
 
       {/* Product Info */}
