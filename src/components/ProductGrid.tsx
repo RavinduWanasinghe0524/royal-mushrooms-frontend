@@ -63,7 +63,7 @@ const products: Product[] = [
 
 export default function ProductGrid() {
   return (
-    <section className="py-24 relative">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -72,12 +72,10 @@ export default function ProductGrid() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-gray-300">Our </span>
-            <span className="text-gradient glow-text">Exquisite </span>
-            <span className="text-gray-300">Selection</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+            Our <span className="text-gradient">Premium</span> Selection
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Each mushroom is carefully selected and harvested at peak freshness to deliver the ultimate culinary experience.
           </p>
         </motion.div>
@@ -108,21 +106,20 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       transition={{ delay: index * 0.1 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="cyber-card rounded-2xl p-6 group cursor-pointer"
+      className="card rounded-xl p-6 group cursor-pointer bg-white"
     >
       {/* Premium Badge */}
       {product.premium && (
-        <div className="absolute top-4 right-4 flex items-center space-x-1 bg-gradient-to-r from-yellow-400 to-orange-500 px-3 py-1 rounded-full">
+        <div className="absolute top-4 right-4 flex items-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-500 px-3 py-1 rounded-full">
           <Sparkles className="w-4 h-4 text-white" />
           <span className="text-xs font-bold text-white">PREMIUM</span>
         </div>
       )}
 
-      {/* Product Image/Icon */}
+      {/* Product Image */}
       <motion.div
         animate={{ 
-          scale: isHovered ? 1.1 : 1,
-          rotate: isHovered ? 5 : 0 
+          scale: isHovered ? 1.05 : 1,
         }}
         className="relative w-full h-48 mb-6"
       >
@@ -136,16 +133,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
       {/* Product Info */}
       <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900">
           {product.name}
         </h3>
         
-        <p className="text-gray-400 text-sm leading-relaxed">
+        <p className="text-gray-600 text-sm leading-relaxed">
           {product.description}
         </p>
 
         {/* Price and Action */}
-        <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
+        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div>
             <span className="text-sm text-gray-500">Starting at</span>
             <p className="text-2xl font-bold text-gradient">
@@ -158,19 +155,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
+            className="p-3 bg-gradient-to-r from-emerald-600 to-green-500 rounded-full hover:shadow-lg transition-all"
           >
             <ShoppingCart className="w-6 h-6 text-white" />
           </motion.button>
         </div>
       </div>
-
-      {/* Hover Effect Overlay */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-2xl pointer-events-none"
-      />
     </motion.div>
   );
 }

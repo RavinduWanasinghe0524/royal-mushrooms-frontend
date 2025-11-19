@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShoppingCart, User, MessageCircle, Crown, Menu, X, Globe } from 'lucide-react';
+import { ShoppingCart, User, Leaf, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -13,20 +13,13 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-cyan-500/20"
+      className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <Crown className="w-10 h-10 text-cyan-400 animate-pulse-glow" />
-              <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full" />
-            </motion.div>
-            <span className="text-2xl font-bold text-gradient glow-text">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="flex items-center space-x-2 group">
+            <Leaf className="w-8 h-8 text-green-600" />
+            <span className="text-xl font-bold text-gray-900">
               Royal Mushrooms
             </span>
           </Link>
@@ -38,9 +31,7 @@ export default function Navbar() {
             <NavLink href="/membership">Membership</NavLink>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <IconButton icon={Globe} />
-            <IconButton icon={MessageCircle} badge />
+          <div className="flex items-center space-x-6">
             <IconButton icon={User} />
             <Link href="/cart">
               <div className="relative">
@@ -49,7 +40,7 @@ export default function Navbar() {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold"
+                    className="absolute -top-1 -right-1 bg-green-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold"
                   >
                     {cartCount}
                   </motion.span>
@@ -59,7 +50,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-cyan-400 p-2"
+              className="md:hidden text-gray-900 p-2"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -91,10 +82,9 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     <Link href={href}>
       <motion.span
         whileHover={{ scale: 1.05 }}
-        className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer font-medium relative group"
+        className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer font-medium"
       >
         {children}
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-300" />
       </motion.span>
     </Link>
   );
@@ -103,7 +93,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 function MobileNavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link href={href}>
-      <span className="text-gray-300 hover:text-cyan-400 transition-colors block py-2">
+      <span className="text-gray-600 hover:text-green-600 transition-colors block py-2">
         {children}
       </span>
     </Link>
@@ -115,11 +105,11 @@ function IconButton({ icon: Icon, badge }: { icon: any; badge?: boolean }) {
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="relative p-2 glass rounded-full hover:bg-cyan-500/10 transition-all"
+      className="relative p-2 hover:bg-gray-100 rounded-full transition-all"
     >
-      <Icon className="w-6 h-6 text-cyan-400" />
+      <Icon className="w-6 h-6 text-gray-700" />
       {badge && (
-        <span className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+        <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
       )}
     </motion.button>
   );
