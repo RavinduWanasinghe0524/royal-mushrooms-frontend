@@ -23,8 +23,8 @@ export default function Navbar() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <Crown className="w-10 h-10 text-cyan-400 animate-pulse-glow" />
-              <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full" />
+              <Crown className="w-10 h-10 text-primary-400 animate-pulse-glow" />
+              <div className="absolute inset-0 bg-primary-400/20 blur-xl rounded-full" />
             </motion.div>
             <span className="text-2xl font-bold text-gradient glow-text">
               Royal Mushrooms
@@ -89,10 +89,10 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     <Link href={href}>
       <motion.span
         whileHover={{ scale: 1.05 }}
-        className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer font-medium relative group"
+        className="text-gray-300 hover:text-primary-400 transition-colors cursor-pointer font-medium relative group"
       >
         {children}
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-300" />
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-accent-400 group-hover:w-full transition-all duration-300" />
       </motion.span>
     </Link>
   );
@@ -101,7 +101,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 function MobileNavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link href={href}>
-      <span className="text-gray-300 hover:text-cyan-400 transition-colors block py-2">
+      <span className="text-gray-300 hover:text-primary-400 transition-colors block py-2">
         {children}
       </span>
     </Link>
@@ -113,11 +113,11 @@ function IconButton({ icon: Icon, badge }: { icon: any; badge?: boolean }) {
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="relative p-2 glass rounded-full hover:bg-cyan-500/10 transition-all"
+      className="relative p-2 glass rounded-full hover:bg-primary-500/10 transition-all"
     >
-      <Icon className="w-6 h-6 text-cyan-400" />
+      <Icon className="w-6 h-6 text-primary-400" />
       {badge && (
-        <span className="absolute top-1 right-1 w-2 h-2 bg-pink-500 rounded-full animate-pulse" />
+        <span className="absolute top-1 right-1 w-2 h-2 bg-accent-500 rounded-full animate-pulse" />
       )}
     </motion.button>
   );

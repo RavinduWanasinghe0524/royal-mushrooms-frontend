@@ -17,7 +17,7 @@ export default function MembershipPage() {
         'Email support',
         'Monthly newsletter',
       ],
-      color: 'from-gray-400 to-gray-600',
+      color: 'from-neutral-400 to-neutral-600',
     },
     {
       name: 'Premium',
@@ -31,7 +31,7 @@ export default function MembershipPage() {
         'Access to exclusive products',
         'Monthly expert consultation',
       ],
-      color: 'from-cyan-400 to-purple-500',
+      color: 'from-primary-400 to-primary-600',
       popular: true,
     },
     {
@@ -47,7 +47,7 @@ export default function MembershipPage() {
         'Weekly consultations',
         'Exclusive events & tastings',
       ],
-      color: 'from-yellow-400 to-orange-500',
+      color: 'from-accent-400 to-accent-600',
     },
   ];
 
@@ -70,7 +70,7 @@ export default function MembershipPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {plans.map((plan, index) => (
               <motion.div
                 key={index}
@@ -78,24 +78,24 @@ export default function MembershipPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`cyber-card rounded-2xl p-8 relative ${
-                  plan.popular ? 'ring-2 ring-cyan-500 scale-105' : ''
+                  plan.popular ? 'ring-2 ring-primary-500 md:scale-105' : ''
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                    <span className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                       MOST POPULAR
                     </span>
                   </div>
                 )}
 
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center mb-6`}>
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center mb-6 mx-auto`}>
                   <plan.icon className="w-8 h-8 text-white" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-3xl font-bold text-white mb-2 text-center">{plan.name}</h3>
                 
-                <div className="mb-6">
+                <div className="mb-6 text-center">
                   <span className="text-4xl font-bold text-gradient">
                     {plan.price === 0 ? 'Free' : `LKR ${plan.price}`}
                   </span>
@@ -105,8 +105,8 @@ export default function MembershipPage() {
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start space-x-3">
-                      <Check className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
+                      <Check className="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -114,10 +114,10 @@ export default function MembershipPage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 rounded-lg font-semibold ${
+                  className={`w-full py-4 rounded-lg font-semibold transition-all ${
                     plan.popular
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white'
-                      : 'glass text-white hover:bg-cyan-500/10'
+                      ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/50'
+                      : 'glass text-white hover:bg-primary-500/10 border border-primary-500/30'
                   }`}
                 >
                   {plan.price === 0 ? 'Get Started' : 'Subscribe Now'}
