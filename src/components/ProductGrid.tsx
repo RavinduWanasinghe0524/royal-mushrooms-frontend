@@ -25,8 +25,7 @@ const products: Product[] = [
     name: 'Forest Shiitake',
     description: 'Rich, umami flavor with meaty texture. Perfect for stir-fries, soups, and Asian cuisine. Packed with vitamin D and antioxidants.',
     price: 899,
-    image: '/images/shiitake.svg',
-    // realImage: '/images/mushrooms/shiitake.jpg', // Add real photo here
+    image: 'https://images.unsplash.com/photo-1602529480436-d0ca3d6e3a5a?w=800&q=80',
     category: 'Culinary',
     rating: 4.9,
     benefits: ['Rich in Vitamin D', 'Immune Support', 'Heart Health'],
@@ -36,8 +35,7 @@ const products: Product[] = [
     name: 'Pearl Oyster',
     description: 'Delicate, velvety texture with subtle seafood notes. Ideal for sautéing, grilling, or as a plant-based protein alternative.',
     price: 749,
-    image: '/images/oyster.svg',
-    // realImage: '/images/mushrooms/oyster.jpg',
+    image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=800&q=80',
     category: 'Culinary',
     rating: 4.8,
     benefits: ['High Protein', 'Low Calorie', 'Antioxidants'],
@@ -47,8 +45,7 @@ const products: Product[] = [
     name: 'Giant Portobello',
     description: 'Robust, steak-like texture perfect for grilling. Excellent as a burger substitute or stuffed for an elegant main course.',
     price: 999,
-    image: '/images/portobello.svg',
-    // realImage: '/images/mushrooms/portobello.jpg',
+    image: 'https://images.unsplash.com/photo-1565281887431-89d6c6c7a321?w=800&q=80',
     category: 'Culinary',
     rating: 4.7,
     benefits: ['Meaty Texture', 'B Vitamins', 'Minerals'],
@@ -58,8 +55,7 @@ const products: Product[] = [
     name: "Royal Lion's Mane",
     description: "Unique seafood-like texture with incredible cognitive benefits. Known as the 'smart mushroom' for brain health support.",
     price: 1299,
-    image: '/images/shiitake.svg',
-    // realImage: '/images/mushrooms/lions-mane.jpg',
+    image: 'https://images.unsplash.com/photo-1617465124221-0d0fd6dc2c7a?w=800&q=80',
     premium: true,
     category: 'Medicinal',
     rating: 5.0,
@@ -70,8 +66,7 @@ const products: Product[] = [
     name: 'Golden Chanterelles',
     description: 'Fruity aroma with peppery notes. A gourmet treasure for risottos, pasta, and fine dining. Rare and seasonal.',
     price: 1499,
-    image: '/images/oyster.svg',
-    // realImage: '/images/mushrooms/chanterelle.jpg',
+    image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=80',
     premium: true,
     category: 'Gourmet',
     rating: 4.9,
@@ -82,8 +77,7 @@ const products: Product[] = [
     name: 'Black Truffle',
     description: 'The pinnacle of luxury fungi. Intense, earthy aroma that transforms any dish. Exclusively for premium members.',
     price: 4999,
-    image: '/images/portobello.svg',
-    // realImage: '/images/mushrooms/truffle.jpg',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80',
     premium: true,
     category: 'Luxury',
     rating: 5.0,
@@ -100,18 +94,23 @@ export default function ProductGrid() {
     : products.filter(p => p.category === filter);
 
   return (
-    <section className="py-32 bg-gradient-to-b from-white via-green-50/30 to-white relative overflow-hidden">
+    <section className="py-32 bg-gradient-to-b from-orange-50/30 via-white to-green-50/30 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full opacity-10 blur-3xl"
+          className="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full opacity-15 blur-3xl"
           animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-200 rounded-full opacity-10 blur-3xl"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-green-300 rounded-full opacity-15 blur-3xl"
           animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
           transition={{ duration: 12, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-300 rounded-full opacity-10 blur-3xl"
+          animate={{ scale: [1, 1.4, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 15, repeat: Infinity }}
         />
       </div>
 
@@ -135,7 +134,7 @@ export default function ProductGrid() {
           </motion.div>
           
           <h2 className="text-5xl md:text-6xl font-black mb-6 text-gray-900">
-            Our <span className="text-gradient">Premium</span> Collection
+            Our <span className="text-gradient-nature">Premium</span> Collection
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -159,8 +158,8 @@ export default function ProductGrid() {
               onClick={() => setFilter(category)}
               className={`px-6 py-3 rounded-full font-semibold transition-all ${
                 filter === category
-                  ? 'bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-lg'
-                  : 'glass text-gray-700 hover:border-green-300'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-300/50'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50'
               }`}
             >
               {category}
@@ -232,7 +231,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     >
       {/* Animated gradient overlay */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-green-500/0 group-hover:from-emerald-500/5 group-hover:to-green-500/5 transition-all duration-500"
+        className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-amber-500/0 group-hover:from-orange-500/5 group-hover:to-amber-500/5 transition-all duration-500"
         style={{ transform: "translateZ(0)" }}
       />
 
@@ -274,14 +273,15 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           rotateZ: isHovered ? [0, -2, 2, 0] : 0
         }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-64 mb-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl overflow-hidden"
+        className="relative w-full h-64 mb-6 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl overflow-hidden"
         style={{ transform: "translateZ(20px)" }}
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-contain p-6"
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Use real image when available:
         <Image
@@ -306,7 +306,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Product Info */}
       <div className="space-y-4 relative" style={{ transform: "translateZ(10px)" }}>
         <div>
-          <div className="text-xs font-semibold text-green-600 mb-1 uppercase tracking-wider">
+          <div className="text-xs font-semibold text-orange-600 mb-1 uppercase tracking-wider">
             {product.category}
           </div>
           <h3 className="text-2xl font-black text-gray-900 mb-2">
@@ -326,7 +326,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 + i * 0.1 }}
-              className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium flex items-center space-x-1"
+              className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded-full font-medium flex items-center space-x-1"
             >
               <Check className="w-3 h-3" />
               <span>{benefit}</span>
@@ -348,7 +348,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
             whileTap={{ scale: 0.9 }}
             onClick={handleAddToCart}
-            className="p-4 bg-gradient-to-r from-emerald-600 to-green-500 rounded-2xl hover:shadow-2xl transition-all group relative overflow-hidden"
+            className="p-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl hover:shadow-2xl hover:shadow-orange-300/50 transition-all group relative overflow-hidden"
           >
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"

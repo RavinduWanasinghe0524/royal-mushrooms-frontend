@@ -38,16 +38,16 @@ export default function Navbar() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-              <div className="relative p-2 bg-gradient-to-r from-emerald-600 to-green-500 rounded-full">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+              <div className="relative p-2 bg-gradient-to-r from-orange-600 to-amber-600 rounded-full">
                 <Leaf className="w-6 h-6 text-white" />
               </div>
             </motion.div>
             <div>
-              <span className="text-2xl font-black bg-gradient-to-r from-emerald-600 to-green-500 bg-clip-text text-transparent">
+              <span className="text-2xl font-black bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
                 Royal Mushrooms
               </span>
-              <div className="text-xs text-gray-500 font-semibold">Premium & Organic</div>
+              <div className="text-xs text-orange-600 font-semibold">Premium & Organic</div>
             </div>
           </Link>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-gradient-to-r from-emerald-600 to-green-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-lg"
+                    className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-600 to-amber-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-lg"
                   >
                     {cartCount}
                   </motion.span>
@@ -150,11 +150,11 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="relative px-4 py-2 text-gray-700 hover:text-green-600 transition-colors cursor-pointer font-semibold group"
+        className="relative px-4 py-2 text-gray-700 hover:text-orange-600 transition-colors cursor-pointer font-semibold group"
       >
         {children}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-600 to-green-500 origin-left"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-600 to-amber-600 origin-left"
           initial={{ scaleX: 0 }}
           whileHover={{ scaleX: 1 }}
           transition={{ duration: 0.3 }}
@@ -169,7 +169,7 @@ function MobileNavLink({ href, children }: { href: string; children: React.React
     <Link href={href}>
       <motion.div
         whileHover={{ x: 10 }}
-        className="text-gray-700 hover:text-green-600 transition-all block py-3 px-4 rounded-xl hover:bg-green-50 font-semibold text-lg"
+        className="text-gray-700 hover:text-orange-600 transition-all block py-3 px-4 rounded-xl hover:bg-orange-50 font-semibold text-lg"
       >
         {children}
       </motion.div>

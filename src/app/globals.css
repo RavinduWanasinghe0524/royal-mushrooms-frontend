@@ -9,7 +9,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f8faf9 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #fef7ed 0%, #ffffff 50%, #f0fdf4 100%);
   color: #1f2937;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
   overflow-x: hidden;
@@ -22,6 +22,29 @@ body {
   
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500;
+  }
+
+  .text-gradient-nature {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-lime-600 via-emerald-500 to-green-600;
+  }
+
+  .bg-nature-light {
+    background: linear-gradient(135deg, #fef3c7 0%, #d1fae5 50%, #fef7ed 100%);
+  }
+
+  .bg-vibrant-green {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+
+  .bg-warm-orange {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  }
+
+  .bg-nature-pattern {
+    background-image: 
+      radial-gradient(at 40% 20%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(251, 146, 60, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(132, 204, 22, 0.1) 0px, transparent 50%);
   }
   
   .card {

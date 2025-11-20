@@ -16,16 +16,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative mt-24 bg-gradient-to-b from-gray-50 to-white border-t border-gray-200 overflow-hidden">
+    <footer className="relative mt-24 bg-gradient-to-b from-orange-50/50 via-amber-50/30 to-white border-t border-orange-100 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-green-200 rounded-full opacity-10 blur-3xl"
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-300 rounded-full opacity-10 blur-3xl"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
         <motion.div
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-200 rounded-full opacity-10 blur-3xl"
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-amber-300 rounded-full opacity-10 blur-3xl"
           animate={{ scale: [1, 1.3, 1] }}
           transition={{ duration: 18, repeat: Infinity }}
         />
@@ -46,14 +46,14 @@ export default function Footer() {
                 transition={{ duration: 0.5 }}
                 className="relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur-lg opacity-50" />
-                <div className="relative p-2 bg-gradient-to-r from-emerald-600 to-green-500 rounded-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-lg opacity-50" />
+                <div className="relative p-2 bg-gradient-to-r from-orange-600 to-amber-600 rounded-full">
                   <Leaf className="w-6 h-6 text-white" />
                 </div>
               </motion.div>
               <div>
-                <span className="text-2xl font-black text-gradient">Royal Mushrooms</span>
-                <div className="text-xs text-gray-500 font-semibold">Premium & Organic</div>
+                <span className="text-2xl font-black text-gradient-nature">Royal Mushrooms</span>
+                <div className="text-xs text-orange-600 font-semibold">Premium & Organic</div>
               </div>
             </motion.div>
             
@@ -71,14 +71,14 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100 outline-none transition-all"
+                  className="flex-1 px-4 py-3 rounded-xl border border-orange-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition-all"
                   required
                 />
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 bg-gradient-to-r from-emerald-600 to-green-500 text-white rounded-xl hover:shadow-lg transition-all"
+                  className="p-3 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl hover:shadow-lg transition-all"
                 >
                   <Send className="w-5 h-5" />
                 </motion.button>
@@ -120,8 +120,8 @@ export default function Footer() {
             <h3 className="text-lg font-black text-gray-900 mb-6">Contact</h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <div className="p-2 bg-green-50 rounded-lg">
-                  <Mail className="w-4 h-4 text-green-600" />
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <Mail className="w-4 h-4 text-orange-600" />
                 </div>
                 <div>
                   <div className="text-xs text-gray-500 mb-1">Email</div>
@@ -129,8 +129,8 @@ export default function Footer() {
                 </div>
               </li>
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <div className="p-2 bg-green-50 rounded-lg">
-                  <Phone className="w-4 h-4 text-green-600" />
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <Phone className="w-4 h-4 text-orange-600" />
                 </div>
                 <div>
                   <div className="text-xs text-gray-500 mb-1">Phone</div>
@@ -138,8 +138,8 @@ export default function Footer() {
                 </div>
               </li>
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <div className="p-2 bg-green-50 rounded-lg">
-                  <MapPin className="w-4 h-4 text-green-600" />
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <MapPin className="w-4 h-4 text-orange-600" />
                 </div>
                 <div>
                   <div className="text-xs text-gray-500 mb-1">Location</div>
@@ -183,7 +183,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
       <Link href={href}>
         <motion.span
           whileHover={{ x: 5 }}
-          className="text-gray-600 hover:text-green-600 transition-all text-sm font-medium inline-block"
+          className="text-gray-600 hover:text-orange-600 transition-all text-sm font-medium inline-block"
         >
           {children}
         </motion.span>
@@ -198,7 +198,7 @@ function SocialIcon({ icon: Icon, href }: { icon: any; href: string }) {
       whileHover={{ scale: 1.1, y: -3 }}
       whileTap={{ scale: 0.9 }}
       href={href}
-      className="w-11 h-11 flex items-center justify-center glass rounded-xl hover:bg-gradient-to-r hover:from-emerald-600 hover:to-green-500 transition-all group"
+      className="w-11 h-11 flex items-center justify-center glass rounded-xl hover:bg-gradient-to-r hover:from-orange-600 hover:to-amber-600 transition-all group"
     >
       <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
     </motion.a>
