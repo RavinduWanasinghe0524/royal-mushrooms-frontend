@@ -92,28 +92,50 @@ export default function ProductsPage() {
     : allProducts.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50/30 via-white to-green-50/30">
       <Navbar />
       
-      <main className="pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-32 pb-20 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full opacity-15 blur-3xl"
+            animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
+            transition={{ duration: 10, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-green-300 rounded-full opacity-15 blur-3xl"
+            animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
+            transition={{ duration: 12, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-300 rounded-full opacity-10 blur-3xl"
+            animate={{ scale: [1, 1.4, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 15, repeat: Infinity }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient glow-text">Our Collection</span>
+            <h1 className="text-5xl md:text-6xl font-black mb-6">
+              <span className="text-gradient-nature">Our Collection</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Browse our complete selection of premium mushrooms
             </p>
           </motion.div>
 
           {/* Filters */}
           <div className="flex items-center justify-center space-x-4 mb-12 flex-wrap gap-4">
-            <Filter className="w-5 h-5 text-cyan-400" />
+            <div className="flex items-center space-x-2 text-orange-600">
+              <Filter className="w-5 h-5" />
+              <span className="font-semibold">Filter:</span>
+            </div>
             {categories.map((cat) => (
               <motion.button
                 key={cat}
@@ -122,8 +144,8 @@ export default function ProductsPage() {
                 onClick={() => setFilter(cat)}
                 className={`px-6 py-2 rounded-full font-medium transition-all ${
                   filter === cat
-                    ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white'
-                    : 'glass text-gray-300 hover:text-white'
+                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-300/50'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50'
                 }`}
               >
                 {cat}
@@ -155,11 +177,11 @@ function ProductCard({ product, index }: { product: any; index: number }) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="cyber-card rounded-2xl p-6 group"
+      className="glass rounded-2xl p-6 group border border-orange-100 hover:border-orange-300 transition-all hover:shadow-xl hover:shadow-orange-100/50"
     >
       <motion.div
         whileHover={{ scale: 1.1, rotate: 5 }}
-        className="relative w-full h-32 mb-4"
+        className="relative w-full h-32 mb-4 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-2"
       >
         <Image
           src={product.image}
@@ -171,24 +193,24 @@ function ProductCard({ product, index }: { product: any; index: number }) {
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs px-3 py-1 glass rounded-full text-cyan-400">
+          <span className="text-xs px-3 py-1 bg-orange-100 rounded-full text-orange-700 font-semibold">
             {product.category}
           </span>
           <div className="flex items-center space-x-1">
-            <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            <span className="text-sm text-gray-400">{product.rating}</span>
+            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+            <span className="text-sm text-gray-600 font-medium">{product.rating}</span>
           </div>
         </div>
 
-        <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
           {product.name}
         </h3>
         
-        <p className="text-gray-400 text-sm">{product.description}</p>
+        <p className="text-gray-600 text-sm">{product.description}</p>
 
         <div className="flex items-center justify-between pt-4">
           <div>
-            <p className="text-2xl font-bold text-gradient">LKR {product.price}</p>
+            <p className="text-2xl font-bold text-gradient-nature">LKR {product.price}</p>
             <span className="text-xs text-gray-500">per 250g</span>
           </div>
 
@@ -196,7 +218,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"
+            className="p-3 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full shadow-lg shadow-orange-300/50"
           >
             <ShoppingCart className="w-5 h-5 text-white" />
           </motion.button>

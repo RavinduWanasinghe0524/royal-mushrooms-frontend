@@ -31,7 +31,7 @@ export default function MembershipPage() {
         'Access to exclusive products',
         'Monthly expert consultation',
       ],
-      color: 'from-cyan-400 to-cyan-600',
+      color: 'from-orange-500 to-amber-500',
       popular: true,
     },
     {
@@ -47,25 +47,44 @@ export default function MembershipPage() {
         'Weekly consultations',
         'Exclusive events & tastings',
       ],
-      color: 'from-purple-400 to-purple-600',
+      color: 'from-green-500 to-emerald-500',
     },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/30 via-white to-orange-50/30">
       <Navbar />
       
-      <main className="pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-32 pb-20 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute -top-40 -left-40 w-96 h-96 bg-orange-300 rounded-full opacity-10 blur-3xl"
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            transition={{ duration: 15, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute -bottom-40 -right-40 w-96 h-96 bg-amber-300 rounded-full opacity-10 blur-3xl"
+            animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }}
+            transition={{ duration: 18, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-80 h-80 bg-green-300 rounded-full opacity-5 blur-3xl"
+            animate={{ scale: [1, 1.4, 1] }}
+            transition={{ duration: 12, repeat: Infinity }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient glow-text">Membership Plans</span>
+            <h1 className="text-5xl md:text-6xl font-black mb-6">
+              <span className="text-gradient-nature">Membership Plans</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Choose the perfect plan for your mushroom journey
             </p>
           </motion.div>
@@ -77,13 +96,13 @@ export default function MembershipPage() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`cyber-card rounded-2xl p-8 relative ${
-                  plan.popular ? 'ring-2 ring-cyan-500 md:scale-105' : ''
+                className={`glass rounded-2xl p-8 relative border ${
+                  plan.popular ? 'ring-2 ring-orange-500 border-orange-200 md:scale-105' : 'border-orange-100'
                 }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <span className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                    <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                       MOST POPULAR
                     </span>
                   </div>
@@ -93,20 +112,20 @@ export default function MembershipPage() {
                   <plan.icon className="w-8 h-8 text-white" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-white mb-2 text-center">{plan.name}</h3>
+                <h3 className="text-3xl font-bold text-gray-900 mb-2 text-center">{plan.name}</h3>
                 
                 <div className="mb-6 text-center">
-                  <span className="text-4xl font-bold text-gradient">
+                  <span className="text-4xl font-bold text-gradient-nature">
                     {plan.price === 0 ? 'Free' : `LKR ${plan.price}`}
                   </span>
-                  {plan.price > 0 && <span className="text-gray-400">/month</span>}
+                  {plan.price > 0 && <span className="text-gray-600">/month</span>}
                 </div>
 
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start space-x-3">
-                      <Check className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300 text-sm">{feature}</span>
+                      <Check className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -116,8 +135,8 @@ export default function MembershipPage() {
                   whileTap={{ scale: 0.98 }}
                   className={`w-full py-4 rounded-lg font-semibold transition-all ${
                     plan.popular
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg shadow-cyan-500/50'
-                      : 'glass text-white hover:bg-cyan-500/10 border border-cyan-500/30'
+                      ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-300/50'
+                      : 'bg-white text-gray-700 border-2 border-orange-200 hover:bg-orange-50 hover:border-orange-300'
                   }`}
                 >
                   {plan.price === 0 ? 'Get Started' : 'Subscribe Now'}
@@ -130,11 +149,13 @@ export default function MembershipPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-16 glass-dark rounded-2xl p-8 text-center"
+            className="mt-16 glass rounded-2xl p-8 text-center border border-orange-100"
           >
-            <Shield className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">30-Day Money-Back Guarantee</h3>
-            <p className="text-gray-400">
+            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center">
+              <Shield className="w-8 h-8 text-green-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">30-Day Money-Back Guarantee</h3>
+            <p className="text-gray-600">
               Not satisfied? Get a full refund within 30 days, no questions asked.
             </p>
           </motion.div>

@@ -7,20 +7,34 @@ import { Video, MessageSquare, Calendar, Check } from 'lucide-react';
 
 export default function ConsultationPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50/30 via-white to-green-50/30">
       <Navbar />
       
-      <main className="pt-32 pb-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-32 pb-20 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 right-10 w-80 h-80 bg-orange-300 rounded-full opacity-10 blur-3xl"
+            animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 20, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-40 left-10 w-96 h-96 bg-green-300 rounded-full opacity-10 blur-3xl"
+            animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
+            transition={{ duration: 15, repeat: Infinity }}
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient glow-text">Expert Consultation</span>
+            <h1 className="text-5xl md:text-6xl font-black mb-6">
+              <span className="text-gradient-nature">Expert Consultation</span>
             </h1>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-600">
               Get personalized advice from our mushroom specialists
             </p>
           </motion.div>
@@ -36,11 +50,13 @@ export default function ConsultationPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="cyber-card rounded-2xl p-6 text-center"
+                className="glass rounded-2xl p-6 text-center border border-orange-100"
               >
-                <item.icon className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-orange-100 to-amber-100 rounded-full flex items-center justify-center">
+                  <item.icon className="w-8 h-8 text-orange-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -49,39 +65,39 @@ export default function ConsultationPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="glass-dark rounded-2xl p-8"
+            className="glass rounded-2xl p-8 border border-orange-100"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Book a Consultation</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Book a Consultation</h2>
             <form className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-full px-4 py-3 bg-white border border-orange-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-full px-4 py-3 bg-white border border-orange-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   placeholder="your@email.com"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Consultation Type</label>
-                <select className="w-full px-4 py-3 glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Consultation Type</label>
+                <select className="w-full px-4 py-3 bg-white border border-orange-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent">
                   <option>Video Call</option>
                   <option>Live Chat</option>
                   <option>Phone Call</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                 <textarea
                   rows={4}
-                  className="w-full px-4 py-3 glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-full px-4 py-3 bg-white border border-orange-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   placeholder="Tell us what you need help with..."
                 />
               </div>
@@ -89,7 +105,7 @@ export default function ConsultationPage() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg font-semibold text-white"
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-lg font-semibold text-white shadow-lg shadow-orange-300/50"
               >
                 Schedule Consultation
               </motion.button>
