@@ -1,34 +1,102 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Leaf, Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Leaf, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Send } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle newsletter subscription
+    console.log('Subscribe:', email);
+    setEmail('');
+  };
+
   return (
-    <footer className="relative mt-24 border-t border-gray-200 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="relative mt-24 bg-gradient-to-b from-gray-50 to-white border-t border-gray-200 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-green-200 rounded-full opacity-10 blur-3xl"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-200 rounded-full opacity-10 blur-3xl"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 18, repeat: Infinity }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Leaf className="w-8 h-8 text-green-600" />
-              <span className="text-xl font-bold text-gray-900">Royal Mushrooms</span>
-            </div>
-            <p className="text-gray-600 text-sm">
-              Premium organic mushrooms delivered fresh to your door. Sustainably sourced, expertly curated.
+          <div className="lg:col-span-2 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center space-x-3"
+            >
+              <motion.div
+                whileHover={{ rotate: [0, -10, 10, 0] }}
+                transition={{ duration: 0.5 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur-lg opacity-50" />
+                <div className="relative p-2 bg-gradient-to-r from-emerald-600 to-green-500 rounded-full">
+                  <Leaf className="w-6 h-6 text-white" />
+                </div>
+              </motion.div>
+              <div>
+                <span className="text-2xl font-black text-gradient">Royal Mushrooms</span>
+                <div className="text-xs text-gray-500 font-semibold">Premium & Organic</div>
+              </div>
+            </motion.div>
+            
+            <p className="text-gray-600 leading-relaxed">
+              Premium organic mushrooms delivered fresh to your door. Sustainably sourced, 
+              expertly curated, and grown with care for exceptional quality and flavor.
             </p>
-            <div className="flex space-x-4">
-              <SocialIcon icon={Facebook} />
-              <SocialIcon icon={Twitter} />
-              <SocialIcon icon={Instagram} />
+            
+            {/* Newsletter */}
+            <div>
+              <h4 className="text-sm font-bold text-gray-900 mb-3">Subscribe to Our Newsletter</h4>
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100 outline-none transition-all"
+                  required
+                />
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 bg-gradient-to-r from-emerald-600 to-green-500 text-white rounded-xl hover:shadow-lg transition-all"
+                >
+                  <Send className="w-5 h-5" />
+                </motion.button>
+              </form>
+            </div>
+
+            {/* Social */}
+            <div className="flex space-x-3">
+              <SocialIcon icon={Facebook} href="#" />
+              <SocialIcon icon={Twitter} href="#" />
+              <SocialIcon icon={Instagram} href="#" />
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-black text-gray-900 mb-6">Quick Links</h3>
+            <ul className="space-y-3">
               <FooterLink href="/">Home</FooterLink>
               <FooterLink href="/products">Products</FooterLink>
               <FooterLink href="/consultation">Consultation</FooterLink>
@@ -38,8 +106,8 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Support</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-black text-gray-900 mb-6">Support</h3>
+            <ul className="space-y-3">
               <FooterLink href="/faq">FAQ</FooterLink>
               <FooterLink href="/shipping">Shipping Info</FooterLink>
               <FooterLink href="/returns">Returns</FooterLink>
@@ -49,38 +117,61 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Contact</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-black text-gray-900 mb-6">Contact</h3>
+            <ul className="space-y-4">
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <Mail className="w-5 h-5 text-green-600 mt-0.5" />
-                <span>support@royalmushrooms.com</span>
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <Mail className="w-4 h-4 text-green-600" />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">Email</div>
+                  <span className="font-medium">support@royalmushrooms.com</span>
+                </div>
               </li>
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <Phone className="w-5 h-5 text-green-600 mt-0.5" />
-                <span>+94 11 234 5678</span>
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <Phone className="w-4 h-4 text-green-600" />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">Phone</div>
+                  <span className="font-medium">+94 11 234 5678</span>
+                </div>
               </li>
               <li className="flex items-start space-x-3 text-gray-600 text-sm">
-                <MapPin className="w-5 h-5 text-green-600 mt-0.5" />
-                <span>Colombo, Sri Lanka</span>
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <MapPin className="w-4 h-4 text-green-600" />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">Location</div>
+                  <span className="font-medium">Colombo, Sri Lanka</span>
+                </div>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-600 text-sm">
-            © {new Date().getFullYear()} Royal Mushrooms. All rights reserved.
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+        >
+          <p className="text-gray-600 text-sm font-medium">
+            © {new Date().getFullYear()} Royal Mushrooms. All rights reserved. Made with 🍄
           </p>
-          <div className="flex space-x-6 text-sm">
-            <Link href="/privacy" className="text-gray-600 hover:text-green-600 transition-colors">
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
+            <Link href="/privacy" className="text-gray-600 hover:text-green-600 transition-colors font-medium">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-600 hover:text-green-600 transition-colors">
+            <Link href="/terms" className="text-gray-600 hover:text-green-600 transition-colors font-medium">
               Terms of Service
             </Link>
+            <Link href="/cookies" className="text-gray-600 hover:text-green-600 transition-colors font-medium">
+              Cookie Policy
+            </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
@@ -89,22 +180,27 @@ export default function Footer() {
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link href={href} className="text-gray-600 hover:text-green-600 transition-colors text-sm">
-        {children}
+      <Link href={href}>
+        <motion.span
+          whileHover={{ x: 5 }}
+          className="text-gray-600 hover:text-green-600 transition-all text-sm font-medium inline-block"
+        >
+          {children}
+        </motion.span>
       </Link>
     </li>
   );
 }
 
-function SocialIcon({ icon: Icon }: { icon: any }) {
+function SocialIcon({ icon: Icon, href }: { icon: any; href: string }) {
   return (
     <motion.a
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.1, y: -3 }}
       whileTap={{ scale: 0.9 }}
-      href="#"
-      className="w-10 h-10 flex items-center justify-center bg-white rounded-full border border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all"
+      href={href}
+      className="w-11 h-11 flex items-center justify-center glass rounded-xl hover:bg-gradient-to-r hover:from-emerald-600 hover:to-green-500 transition-all group"
     >
-      <Icon className="w-5 h-5 text-gray-600" />
+      <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
     </motion.a>
   );
 }
