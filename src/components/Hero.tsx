@@ -18,27 +18,28 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Vibrant Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-emerald-50 to-orange-50">
-        <div className="absolute inset-0 bg-nature-pattern" />
+      {/* Dark Background with animated gradients */}
+      <div className="absolute inset-0 bg-black">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-black to-green-900/30" />
         <motion.div 
           style={{ y, opacity }}
           className="absolute inset-0"
         >
-          {/* Colorful floating particles */}
+          {/* Glowing particles */}
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute w-3 h-3 rounded-full ${
-                i % 4 === 0 ? 'bg-orange-400' :
-                i % 4 === 1 ? 'bg-green-400' :
-                i % 4 === 2 ? 'bg-yellow-400' :
-                'bg-emerald-400'
-              } opacity-30`}
+              className={`absolute w-2 h-2 rounded-full ${
+                i % 4 === 0 ? 'bg-orange-500' :
+                i % 4 === 1 ? 'bg-green-500' :
+                i % 4 === 2 ? 'bg-yellow-500' :
+                'bg-emerald-500'
+              } opacity-40 blur-sm`}
               animate={{
                 y: [0, -100, 0],
                 x: [0, Math.random() * 100 - 50, 0],
-                scale: [1, 1.5, 1],
+                scale: [1, 2, 1],
+                opacity: [0.4, 0.8, 0.4],
               }}
               transition={{
                 duration: Math.random() * 5 + 5,
@@ -67,23 +68,23 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-100 to-amber-100 px-5 py-3 rounded-full shadow-lg border-2 border-orange-200"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg border-2 border-orange-500/30"
             >
               <motion.div
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <Leaf className="w-5 h-5 text-orange-600" />
+                <Leaf className="w-5 h-5 text-orange-400" />
               </motion.div>
-              <span className="text-sm font-semibold text-orange-800">100% Organic & Fresh</span>
-              <Sparkles className="w-4 h-4 text-yellow-500" />
+              <span className="text-sm font-semibold text-orange-200">100% Organic & Fresh</span>
+              <Sparkles className="w-4 h-4 text-yellow-400" />
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight drop-shadow-2xl"
             >
               Discover
               <motion.span 
@@ -96,14 +97,14 @@ export default function Hero() {
               >
                 Royal Mushrooms
               </motion.span>
-              <span className="block bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">Nature's Finest</span>
+              <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Nature's Finest</span>
             </motion.h1>
 
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl"
+              className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl"
             >
               Experience the extraordinary world of premium mushrooms. 
               Hand-picked, sustainably grown, and delivered fresh to your door. 

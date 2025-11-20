@@ -78,10 +78,10 @@ export default function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
             Why Choose <span className="text-gradient-nature">Royal Mushrooms</span>?
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Experience the difference with our commitment to quality, sustainability, and customer satisfaction.
           </p>
         </motion.div>
@@ -139,11 +139,11 @@ export default function Features() {
                   </motion.div>
                 </motion.div>
               
-                <h3 className="text-xl font-black text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-600 group-hover:to-amber-600 transition-all">
+                <h3 className="text-xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-amber-400 transition-all">
                   {feature.title}
                 </h3>
               
-                <p className="text-gray-600 font-medium">
+                <p className="text-gray-400 font-medium">
                   {feature.description}
                 </p>
 

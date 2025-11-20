@@ -16,16 +16,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative mt-24 bg-gradient-to-b from-orange-50/50 via-amber-50/30 to-white border-t border-orange-100 overflow-hidden">
+    <footer className="relative mt-24 border-t border-orange-500/20 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-300 rounded-full opacity-10 blur-3xl"
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
         <motion.div
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-amber-300 rounded-full opacity-10 blur-3xl"
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.3, 1] }}
           transition={{ duration: 18, repeat: Infinity }}
         />
@@ -53,7 +53,7 @@ export default function Footer() {
               </motion.div>
               <div>
                 <span className="text-2xl font-black text-gradient-nature">Royal Mushrooms</span>
-                <div className="text-xs text-orange-600 font-semibold">Premium & Organic</div>
+                <div className="text-xs text-orange-400 font-semibold">Premium & Organic</div>
               </div>
             </motion.div>
             
@@ -183,7 +183,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
       <Link href={href}>
         <motion.span
           whileHover={{ x: 5 }}
-          className="text-gray-600 hover:text-orange-600 transition-all text-sm font-medium inline-block"
+          className="text-gray-400 hover:text-orange-400 transition-all text-sm font-medium inline-block"
         >
           {children}
         </motion.span>
@@ -198,9 +198,9 @@ function SocialIcon({ icon: Icon, href }: { icon: any; href: string }) {
       whileHover={{ scale: 1.1, y: -3 }}
       whileTap={{ scale: 0.9 }}
       href={href}
-      className="w-11 h-11 flex items-center justify-center glass rounded-xl hover:bg-gradient-to-r hover:from-orange-600 hover:to-amber-600 transition-all group"
+      className="w-11 h-11 flex items-center justify-center glass rounded-xl hover:bg-gradient-to-r hover:from-orange-600 hover:to-amber-600 border border-orange-500/20 hover:border-orange-500/50 transition-all group"
     >
-      <Icon className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+      <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
     </motion.a>
   );
 }

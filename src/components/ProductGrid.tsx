@@ -94,21 +94,21 @@ export default function ProductGrid() {
     : products.filter(p => p.category === filter);
 
   return (
-    <section className="py-32 bg-gradient-to-b from-orange-50/30 via-white to-green-50/30 relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full opacity-15 blur-3xl"
+          className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-green-300 rounded-full opacity-15 blur-3xl"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"
           animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
           transition={{ duration: 12, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-300 rounded-full opacity-10 blur-3xl"
+          className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.4, 1], rotate: [0, 180, 360] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
@@ -158,8 +158,8 @@ export default function ProductGrid() {
               onClick={() => setFilter(category)}
               className={`px-6 py-3 rounded-full font-semibold transition-all ${
                 filter === category
-                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-300/50'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/50'
+                  : 'bg-white/10 backdrop-blur-sm text-gray-300 border-2 border-white/20 hover:border-orange-400 hover:bg-orange-500/20 hover:text-white'
               }`}
             >
               {category}
@@ -273,14 +273,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           rotateZ: isHovered ? [0, -2, 2, 0] : 0
         }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-64 mb-6 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl overflow-hidden"
+        className="relative w-full h-64 mb-6 bg-gradient-to-br from-orange-900/30 to-amber-900/30 rounded-xl overflow-hidden border border-orange-500/20"
         style={{ transform: "translateZ(20px)" }}
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover opacity-90"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Use real image when available:
@@ -306,15 +306,15 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Product Info */}
       <div className="space-y-4 relative" style={{ transform: "translateZ(10px)" }}>
         <div>
-          <div className="text-xs font-semibold text-orange-600 mb-1 uppercase tracking-wider">
+          <div className="text-xs font-semibold text-orange-400 mb-1 uppercase tracking-wider">
             {product.category}
           </div>
-          <h3 className="text-2xl font-black text-gray-900 mb-2">
+          <h3 className="text-2xl font-black text-white mb-2">
             {product.name}
           </h3>
         </div>
         
-        <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
           {product.description}
         </p>
 
@@ -326,7 +326,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 + i * 0.1 }}
-              className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded-full font-medium flex items-center space-x-1"
+              className="text-xs px-2 py-1 bg-orange-500/20 text-orange-400 rounded-full font-medium flex items-center space-x-1 border border-orange-500/30"
             >
               <Check className="w-3 h-3" />
               <span>{benefit}</span>
