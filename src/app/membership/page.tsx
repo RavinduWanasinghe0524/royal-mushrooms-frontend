@@ -3,7 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { Crown, Check, Zap, Shield, Star } from 'lucide-react';
+import { Crown, Check, Zap, Shield, Star, ArrowRight } from 'lucide-react';
 
 export default function MembershipPage() {
   const plans = [
@@ -18,6 +18,8 @@ export default function MembershipPage() {
         'Monthly newsletter',
       ],
       color: 'from-gray-400 to-gray-600',
+      borderColor: 'border-gray-200',
+      buttonStyle: 'border-2 border-gray-200 hover:border-gray-400 text-gray-600',
     },
     {
       name: 'Premium',
@@ -32,7 +34,9 @@ export default function MembershipPage() {
         'Monthly expert consultation',
       ],
       color: 'from-[#d4af37] to-[#b8941f]',
+      borderColor: 'border-[#d4af37]',
       popular: true,
+      buttonStyle: 'bg-gradient-gold text-[#1a4d2e] shadow-gold hover:shadow-glow',
     },
     {
       name: 'Elite',
@@ -48,30 +52,27 @@ export default function MembershipPage() {
         'Exclusive events & tastings',
       ],
       color: 'from-[#1a4d2e] to-[#0f2919]',
+      borderColor: 'border-[#1a4d2e]',
+      buttonStyle: 'bg-[#1a4d2e] text-white hover:bg-[#0f2919]',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#faf8f3] via-white to-[#c9d4bc]/30">
+    <div className="min-h-screen bg-[#faf8f3]">
       <Navbar />
       
       <main className="pt-32 pb-20 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute -top-40 -left-40 w-96 h-96 bg-[#d4af37]/10 rounded-full opacity-10 blur-3xl"
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            className="absolute -top-40 -left-40 w-[800px] h-[800px] bg-[#d4af37]/5 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 15, repeat: Infinity }}
           />
-                   <motion.div
-            className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#d4af37]/10 rounded-full opacity-10 blur-3xl"
-            animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }}
+           <motion.div
+            className="absolute -bottom-40 -right-40 w-[800px] h-[800px] bg-[#1a4d2e]/5 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 18, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 w-80 h-80 bg-[#1a4d2e]/5 rounded-full opacity-5 blur-3xl"
-            animate={{ scale: [1, 1.4, 1] }}
-            transition={{ duration: 12, repeat: Infinity }}
           />
         </div>
 
@@ -79,53 +80,59 @@ export default function MembershipPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h1 className="text-5xl md:text-6xl font-black mb-6">
-              <span className="text-gradient-nature">Membership Plans</span>
+            <span className="text-[#d4af37] font-bold tracking-wider uppercase text-sm mb-4 block">Membership</span>
+            <h1 className="text-5xl md:text-6xl font-bold text-[#1a4d2e] mb-6 font-serif">
+              Join the Kingdom
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the perfect plan for your mushroom journey
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Unlock exclusive benefits, premium access, and special pricing with our membership tiers.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-center">
             {plans.map((plan, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`glass rounded-2xl p-8 relative border ${
-                  plan.popular ? 'ring-2 ring-[#d4af37] border-[#a8b899]/30 md:scale-105' : 'border-[#a8b899]/20'
+                className={`relative bg-white rounded-3xl p-8 transition-all duration-300 ${
+                  plan.popular 
+                    ? 'shadow-2xl scale-105 z-10 border-2 border-[#d4af37]' 
+                    : 'shadow-lg hover:shadow-xl border border-gray-100'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <span className="bg-gradient-gold text-[#1a4d2e] px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-20">
+                    <span className="bg-gradient-gold text-[#1a4d2e] px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
+                      <Crown className="w-4 h-4" />
                       MOST POPULAR
                     </span>
                   </div>
                 )}
 
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center mb-6 mx-auto`}>
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${plan.color} flex items-center justify-center mb-6 mx-auto shadow-lg transform rotate-3`}>
                   <plan.icon className="w-8 h-8 text-white" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-gray-900 mb-2 text-center">{plan.name}</h3>
+                <h3 className="text-2xl font-bold text-[#1a4d2e] mb-2 text-center">{plan.name}</h3>
                 
-                <div className="mb-6 text-center">
-                  <span className="text-4xl font-bold text-gradient-nature">
-                    {plan.price === 0 ? 'Free' : `LKR ${plan.price}`}
+                <div className="mb-8 text-center">
+                  <span className="text-5xl font-bold text-[#1a4d2e] tracking-tight">
+                    {plan.price === 0 ? 'Free' : `LKR ${plan.price.toLocaleString()}`}
                   </span>
-                  {plan.price > 0 && <span className="text-gray-600">/month</span>}
+                  {plan.price > 0 && <span className="text-gray-500 font-medium">/month</span>}
                 </div>
 
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start space-x-3">
-                      <Check className="w-5 h-5 text-[#d4af37] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{feature}</span>
+                    <li key={i} className="flex items-start space-x-3 group">
+                      <div className={`mt-1 w-5 h-5 rounded-full flex items-center justify-center bg-gradient-to-br ${plan.color} flex-shrink-0`}>
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                      <span className="text-gray-600 text-sm group-hover:text-[#1a4d2e] transition-colors">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -133,13 +140,10 @@ export default function MembershipPage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 rounded-lg font-semibold transition-all ${
-                    plan.popular
-                      ? 'bg-gradient-gold text-[#1a4d2e] shadow-lg shadow-[#d4af37]/50'
-                      : 'bg-white text-gray-700 border-2 border-[#a8b899]/30 hover:bg-[#faf8f3] hover:border-[#d4af37]'
-                  }`}
+                  className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${plan.buttonStyle}`}
                 >
                   {plan.price === 0 ? 'Get Started' : 'Subscribe Now'}
+                  <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </motion.div>
             ))}
@@ -149,15 +153,22 @@ export default function MembershipPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-16 glass rounded-2xl p-8 text-center border border-[#a8b899]/20"
+            className="mt-20 bg-white rounded-3xl p-12 text-center shadow-xl border border-gray-100 relative overflow-hidden"
           >
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center">
-              <Shield className="w-8 h-8 text-green-600" />
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-nature" />
+            <div className="w-20 h-20 mx-auto mb-6 bg-green-50 rounded-full flex items-center justify-center">
+              <Shield className="w-10 h-10 text-[#1a4d2e]" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">30-Day Money-Back Guarantee</h3>
-            <p className="text-gray-600">
-              Not satisfied? Get a full refund within 30 days, no questions asked.
+            <h3 className="text-2xl font-bold text-[#1a4d2e] mb-4">30-Day Money-Back Guarantee</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+              We're confident you'll love being part of our community. If you're not completely satisfied with your membership, 
+              we'll refund your first month - no questions asked.
             </p>
+            <div className="flex justify-center gap-8 text-sm font-medium text-gray-400">
+              <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#d4af37]" /> No hidden fees</span>
+              <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#d4af37]" /> Cancel anytime</span>
+              <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#d4af37]" /> Secure payment</span>
+            </div>
           </motion.div>
         </div>
       </main>
