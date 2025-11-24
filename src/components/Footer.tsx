@@ -1,95 +1,111 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Leaf } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Leaf, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-nature text-white overflow-hidden pt-24 pb-12">
+    <footer className="relative bg-gradient-forest text-white overflow-hidden pt-24 pb-12">
+      {/* Decorative Background */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#d4af37]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#a8b899]/10 rounded-full blur-3xl" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-orange-500 rounded-full shadow-lg">
-                <Leaf className="w-6 h-6 text-white" />
+              <div className="p-3 bg-gradient-gold rounded-2xl shadow-gold">
+                <Leaf className="w-6 h-6 text-[#1a4d2e]" />
               </div>
               <span className="text-2xl font-bold tracking-tight">Royal Mushrooms</span>
             </div>
-            <p className="text-white/90 leading-relaxed">
-              Cultivating the finest organic fungi for culinary excellence and holistic wellness. Experience the royal standard of nature's bounty.
+            <p className="text-white/80 leading-relaxed">
+              Cultivating nature's finest organic fungi for culinary excellence and holistic wellness since 2015.
             </p>
             <div className="flex space-x-4">
-              <SocialIcon icon={Facebook} />
-              <SocialIcon icon={Instagram} />
-              <SocialIcon icon={Twitter} />
+              <SocialIcon icon={Facebook} href="https://facebook.com" />
+              <SocialIcon icon={Instagram} href="https://instagram.com" />
+              <SocialIcon icon={Twitter} href="https://twitter.com" />
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-200">Explore</h3>
+            <h3 className="text-lg font-bold mb-6 text-[#d4af37]">Explore</h3>
             <ul className="space-y-4">
-              <FooterLink href="/products">Our Collection</FooterLink>
-              <FooterLink href="/about">Our Story</FooterLink>
-              <FooterLink href="/consultation">Expert Consultation</FooterLink>
+              <FooterLink href="#products">Our Collection</FooterLink>
+              <FooterLink href="#benefits">Health Benefits</FooterLink>
+              <FooterLink href="#process">Our Process</FooterLink>
+              <FooterLink href="/about">About Us</FooterLink>
               <FooterLink href="/blog">Mushroom Guide</FooterLink>
-              <FooterLink href="/membership">Royal Membership</FooterLink>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-200">Contact Us</h3>
-            <ul className="space-y-6">
+            <h3 className="text-lg font-bold mb-6 text-[#d4af37]">Contact Us</h3>
+            <ul className="space-y-5">
               <li className="flex items-start space-x-3 group">
-                <MapPin className="w-5 h-5 text-orange-300 mt-1 group-hover:text-white transition-colors" />
-                <span className="text-white/90 group-hover:text-white transition-colors">
+                <MapPin className="w-5 h-5 text-[#d4af37] mt-1 group-hover:text-white transition-colors" />
+                <span className="text-white/80 group-hover:text-white transition-colors text-sm">
                   123 Green Valley Road,<br />
                   Colombo 07, Sri Lanka
                 </span>
               </li>
               <li className="flex items-center space-x-3 group">
-                <Phone className="w-5 h-5 text-orange-300 group-hover:text-white transition-colors" />
-                <span className="text-white/90 group-hover:text-white transition-colors">+94 77 123 4567</span>
+                <Phone className="w-5 h-5 text-[#d4af37] group-hover:text-white transition-colors" />
+                <span className="text-white/80 group-hover:text-white transition-colors text-sm">
+                  +94 77 123 4567
+                </span>
               </li>
               <li className="flex items-center space-x-3 group">
-                <Mail className="w-5 h-5 text-orange-300 group-hover:text-white transition-colors" />
-                <span className="text-white/90 group-hover:text-white transition-colors">hello@royalnature.com</span>
+                <Mail className="w-5 h-5 text-[#d4af37] group-hover:text-white transition-colors" />
+                <span className="text-white/80 group-hover:text-white transition-colors text-sm">
+                  hello@royalmushrooms.com
+                </span>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-200">Stay Updated</h3>
-            <p className="text-white/90 mb-6">Subscribe to our newsletter for exclusive offers and seasonal harvest updates.</p>
+            <h3 className="text-lg font-bold mb-6 text-[#d4af37]">Stay Connected</h3>
+            <p className="text-white/80 mb-6 text-sm">
+              Subscribe for exclusive offers, seasonal harvest updates, and wellness tips.
+            </p>
             <form className="space-y-3">
               <div className="relative">
                 <input 
                   type="email" 
                   placeholder="Your email address"
-                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-white placeholder-white/60 transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/50 outline-none text-white placeholder-white/50 transition-all"
                 />
               </div>
-              <button className="w-full py-3 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 transition-colors flex items-center justify-center space-x-2 shadow-lg shadow-orange-500/20">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-premium w-full py-3 bg-gradient-gold text-[#1a4d2e] font-bold rounded-xl shadow-gold hover:shadow-2xl transition-all flex items-center justify-center space-x-2"
+              >
                 <span>Subscribe</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </form>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-white/60 text-sm">
-            © 2024 Royal Mushrooms. All rights reserved.
-          </p>
-          <div className="flex space-x-6 text-sm text-white/60">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="/shipping" className="hover:text-white transition-colors">Shipping Info</Link>
+        <div className="pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-white/60 text-sm flex items-center gap-2">
+              © 2024 Royal Mushrooms. Made with <Heart className="w-4 h-4 text-[#d4af37] fill-[#d4af37]" /> for mushroom lovers
+            </p>
+            <div className="flex space-x-6 text-sm text-white/60">
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/shipping" className="hover:text-white transition-colors">Shipping</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -97,13 +113,15 @@ export default function Footer() {
   );
 }
 
-function SocialIcon({ icon: Icon }: { icon: any }) {
+function SocialIcon({ icon: Icon, href }: { icon: any; href: string }) {
   return (
     <motion.a
-      href="#"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       whileHover={{ scale: 1.1, rotate: 5 }}
       whileTap={{ scale: 0.9 }}
-      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-green-600 transition-all"
+      className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-gold hover:text-[#1a4d2e] transition-all"
     >
       <Icon className="w-5 h-5" />
     </motion.a>
@@ -113,8 +131,11 @@ function SocialIcon({ icon: Icon }: { icon: any }) {
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link href={href} className="text-white/80 hover:text-white transition-colors flex items-center space-x-2 group">
-        <span className="w-1.5 h-1.5 rounded-full bg-orange-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <Link 
+        href={href} 
+        className="text-white/80 hover:text-white transition-colors flex items-center space-x-2 group text-sm"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
         <span className="group-hover:translate-x-1 transition-transform">{children}</span>
       </Link>
     </li>
