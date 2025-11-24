@@ -1,7 +1,9 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
 import ProductGrid from '@/components/ProductGrid';
+import Benefits from '@/components/Benefits';
+import Process from '@/components/Process';
+import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -9,8 +11,10 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <Features />
       <ProductGrid />
+      <Benefits />
+      <Process />
+      <Testimonials />
       <Footer />
     </main>
   );
