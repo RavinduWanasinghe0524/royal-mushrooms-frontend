@@ -9,25 +9,25 @@ const steps = [
     icon: Sprout,
     title: 'Inoculation',
     description: 'We start with premium, organic substrate and carefully selected mushroom cultures to ensure the highest quality foundation.',
-    image: '/api/placeholder/600/400',
+    image: '/images/shiitake.png',
   },
   {
     icon: Droplet,
     title: 'Cultivation',
     description: 'Our state-of-the-art facilities maintain optimal humidity, temperature, and airflow for perfect growing conditions.',
-    image: '/api/placeholder/600/400',
+    image: '/images/oyster.png',
   },
   {
     icon: Sun,
     title: 'Maturation',
     description: 'We monitor each batch closely, allowing mushrooms to reach peak potency and nutritional value before harvesting.',
-    image: '/api/placeholder/600/400',
+    image: '/images/portobello.svg',
   },
   {
     icon: Package,
     title: 'Quality Control',
     description: 'Every harvest undergoes rigorous testing and careful packaging to preserve freshness and deliver excellence to your door.',
-    image: '/api/placeholder/600/400',
+    image: '/images/shiitake.png',
   },
 ];
 

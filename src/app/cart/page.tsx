@@ -54,19 +54,20 @@ export default function CartPage() {
   const total = subtotal + delivery;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#faf8f3]">
+
       <Navbar />
       
       <main className="pt-32 pb-20 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute top-20 left-10 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-96 h-96 bg-[#d4af37]/20 rounded-full blur-3xl"
             animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
             transition={{ duration: 15, repeat: Infinity }}
           />
           <motion.div
-            className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-96 h-96 bg-[#1a4d2e]/20 rounded-full blur-3xl"
             animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
             transition={{ duration: 18, repeat: Infinity }}
           />
@@ -81,7 +82,7 @@ export default function CartPage() {
             <h1 className="text-5xl md:text-6xl font-black mb-6">
               <span className="text-gradient-nature">Shopping Cart</span>
             </h1>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-[#4a3428]">
               {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
             </p>
           </motion.div>
@@ -92,14 +93,14 @@ export default function CartPage() {
               animate={{ opacity: 1 }}
               className="text-center py-20"
             >
-              <ShoppingCart className="w-24 h-24 text-orange-500 mx-auto mb-6" />
-              <h2 className="text-2xl font-bold text-gray-300 mb-4">Your cart is empty</h2>
-              <p className="text-gray-500 mb-8">Start adding some delicious mushrooms!</p>
+              <ShoppingCart className="w-24 h-24 text-[#d4af37] mx-auto mb-6" />
+              <h2 className="text-2xl font-bold text-[#4a3428] mb-4">Your cart is empty</h2>
+              <p className="text-[#4a3428]/70 mb-8">Start adding some delicious mushrooms!</p>
               <motion.a
                 href="/products"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full font-semibold text-white shadow-lg shadow-orange-300/50"
+                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-forest rounded-full font-semibold text-white shadow-lg shadow-[#1a4d2e]/50"
               >
                 <span>Browse Products</span>
                 <ArrowRight className="w-5 h-5" />
@@ -114,10 +115,10 @@ export default function CartPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="glass rounded-xl p-6 border border-orange-500/20"
+                    className="glass rounded-xl p-6 border border-[#1a4d2e]/20"
                   >
                     <div className="flex items-center space-x-6">
-                      <div className="relative w-24 h-24 flex-shrink-0 bg-gradient-to-br from-orange-900/50 to-amber-900/50 rounded-xl p-2 border border-orange-500/30">
+                      <div className="relative w-24 h-24 flex-shrink-0 bg-gradient-to-br from-[#1a4d2e]/50 to-[#0f2919]/50 rounded-xl p-2 border border-[#1a4d2e]/30">
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -127,23 +128,23 @@ export default function CartPage() {
                       </div>
                       
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">{item.name}</h3>
                         <p className="text-2xl font-bold text-gradient-nature">LKR {item.price}</p>
-                        <span className="text-xs text-gray-500">per 250g</span>
+                        <span className="text-xs text-[#4a3428]/70">per 250g</span>
                       </div>
 
                       <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-2 bg-orange-500/10 rounded-full px-4 py-2 border border-orange-500/30">
+                        <div className="flex items-center space-x-2 bg-[#1a4d2e]/10 rounded-full px-4 py-2 border border-[#1a4d2e]/30">
                           <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => updateQuantity(item.id, -1)}
-                            className="text-orange-400 hover:text-orange-300"
+                            className="text-[#d4af37] hover:text-[#f4e4b0]"
                           >
                             <Minus className="w-4 h-4" />
                           </motion.button>
                           
-                          <span className="text-white font-medium w-8 text-center">
+                          <span className="text-[#1a4d2e] font-medium w-8 text-center">
                             {item.quantity}
                           </span>
                           
@@ -151,7 +152,7 @@ export default function CartPage() {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => updateQuantity(item.id, 1)}
-                            className="text-orange-400 hover:text-orange-300"
+                            className="text-[#d4af37] hover:text-[#f4e4b0]"
                           >
                             <Plus className="w-4 h-4" />
                           </motion.button>
@@ -175,30 +176,30 @@ export default function CartPage() {
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="glass rounded-xl p-6 sticky top-24 border border-orange-500/20"
+                  className="glass rounded-xl p-6 sticky top-24 border border-[#1a4d2e]/20"
                 >
-                  <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
+                  <h2 className="text-2xl font-bold text-[#1a4d2e] mb-6">Order Summary</h2>
                   
                   <div className="space-y-4 mb-6">
-                    <div className="flex justify-between text-gray-300">
+                    <div className="flex justify-between text-[#4a3428]">
                       <span>Subtotal</span>
                       <span>LKR {subtotal}</span>
                     </div>
                     
-                    <div className="flex justify-between text-gray-300">
+                    <div className="flex justify-between text-[#4a3428]">
                       <span>Delivery</span>
                       <span>{delivery === 0 ? 'FREE' : `LKR ${delivery}`}</span>
                     </div>
                     
                     {subtotal < 5000 && (
-                      <p className="text-sm text-orange-400 bg-orange-500/10 p-3 rounded-lg border border-orange-500/30">
+                      <p className="text-sm text-[#d4af37] bg-[#d4af37]/10 p-3 rounded-lg border border-[#d4af37]/30">
                         Add LKR {5000 - subtotal} more for free delivery!
                       </p>
                     )}
                     
-                    <div className="border-t border-orange-500/30 pt-4">
+                    <div className="border-t border-[#1a4d2e]/30 pt-4">
                       <div className="flex justify-between text-xl font-bold">
-                        <span className="text-white">Total</span>
+                        <span className="text-[#1a4d2e]">Total</span>
                         <span className="text-gradient-nature">LKR {total}</span>
                       </div>
                     </div>
@@ -207,7 +208,7 @@ export default function CartPage() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-lg font-semibold text-white shadow-lg shadow-orange-300/50 flex items-center justify-center space-x-2"
+                    className="w-full py-4 bg-gradient-gold rounded-lg font-semibold text-[#1a4d2e] shadow-lg shadow-[#d4af37]/50 flex items-center justify-center space-x-2"
                   >
                     <span>Proceed to Checkout</span>
                     <ArrowRight className="w-5 h-5" />

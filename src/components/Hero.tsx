@@ -8,15 +8,8 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Gradient */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/api/placeholder/1920/1080"
-          alt="Mushroom Forest"
-          fill
-          className="object-cover"
-          priority
-        />
         <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e]/95 via-[#1a4d2e]/85 to-[#0f2919]/90" />
       </div>
 

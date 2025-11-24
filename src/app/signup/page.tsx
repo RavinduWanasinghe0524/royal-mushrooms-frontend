@@ -67,7 +67,7 @@ export default function SignupPage() {
                 <input 
                   type="text" 
                   placeholder="Doe"
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none transition-all"
                   required
                 />
               </div>
@@ -93,7 +93,7 @@ export default function SignupPage() {
                 <input 
                   type="tel" 
                   placeholder="+94 77 123 4567"
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none transition-all"
                   required
                 />
               </div>
@@ -106,14 +106,14 @@ export default function SignupPage() {
                 <input 
                   type="password" 
                   placeholder="Create a strong password"
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none transition-all"
                   required
                 />
               </div>
             </div>
 
             <div className="flex items-start space-x-3 pt-2">
-              <input type="checkbox" className="mt-1 w-4 h-4 text-royal-green rounded border-gray-300 focus:ring-royal-gold" required />
+              <input type="checkbox" className="mt-1 w-4 h-4 text-[#1a4d2e] rounded border-gray-300 focus:ring-[#d4af37]" required />
               <p className="text-xs text-gray-500">
                 I agree to the <Link href="/terms" className="text-royal-gold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-royal-gold hover:underline">Privacy Policy</Link>.
               </p>
