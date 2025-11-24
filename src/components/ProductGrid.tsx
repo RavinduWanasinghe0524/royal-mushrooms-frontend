@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { ShoppingCart, Sparkles, Heart, Star, Check } from 'lucide-react';
+import { ShoppingCart, Sparkles, Heart, Star, Check, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
@@ -12,7 +12,7 @@ interface Product {
   description: string;
   price: number;
   image: string;
-  realImage?: string; // For real mushroom photos
+  realImage?: string;
   premium?: boolean;
   category: string;
   rating: number;
@@ -94,23 +94,18 @@ export default function ProductGrid() {
     : products.filter(p => p.category === filter);
 
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden bg-black/50">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
+          className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
+          className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/10 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 12, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.4, 1], rotate: [0, 180, 360] }}
-          transition={{ duration: 15, repeat: Infinity }}
         />
       </div>
 
@@ -130,14 +125,14 @@ export default function ProductGrid() {
             transition={{ delay: 0.2, type: "spring" }}
             className="inline-block mb-4"
           >
-            <span className="text-6xl">🍄</span>
+            <span className="text-6xl filter drop-shadow-lg">🍄</span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-black mb-6 text-gray-900">
+          <h2 className="text-5xl md:text-6xl font-black mb-6 text-white tracking-tight">
             Our <span className="text-gradient-nature">Premium</span> Collection
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Handpicked varieties from sustainable farms. Each mushroom is harvested at peak freshness 
             to deliver exceptional flavor and maximum nutritional benefits.
           </p>
@@ -156,10 +151,10 @@ export default function ProductGrid() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(category)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all ${
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 filter === category
-                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/50'
-                  : 'bg-white/10 backdrop-blur-sm text-gray-300 border-2 border-white/20 hover:border-orange-400 hover:bg-orange-500/20 hover:text-white'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/20'
+                  : 'glass text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
               {category}
@@ -198,13 +193,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     mouseY.set(e.clientY - centerY);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
     toast.success(
       <div className="flex items-center space-x-2">
         <span className="text-2xl">🎉</span>
         <span><strong>{product.name}</strong> added to cart!</span>
       </div>,
-      { duration: 3000 }
+      { 
+        duration: 3000,
+        style: {
+          background: '#1a1a1a',
+          color: '#fff',
+          border: '1px solid #333'
+        }
+      }
     );
   };
 
@@ -227,24 +230,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         rotateY: isHovered ? rotateY : 0,
         transformStyle: "preserve-3d"
       }}
-      className="card rounded-2xl p-6 group cursor-pointer relative overflow-hidden"
+      className="card-premium rounded-3xl p-6 group cursor-pointer relative overflow-hidden h-full flex flex-col"
     >
-      {/* Animated gradient overlay */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-amber-500/0 group-hover:from-orange-500/5 group-hover:to-amber-500/5 transition-all duration-500"
-        style={{ transform: "translateZ(0)" }}
-      />
-
       {/* Premium Badge */}
       {product.premium && (
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
-          className="absolute top-4 right-4 z-20 flex items-center space-x-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 px-3 py-1.5 rounded-full shadow-lg"
+          className="absolute top-4 right-4 z-20 flex items-center space-x-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 px-3 py-1.5 rounded-full shadow-lg border border-yellow-200/20"
         >
-          <Sparkles className="w-4 h-4 text-white animate-pulse" />
-          <span className="text-xs font-black text-white">PREMIUM</span>
+          <Sparkles className="w-3 h-3 text-white animate-pulse" />
+          <span className="text-[10px] font-black text-white tracking-wider">PREMIUM</span>
         </motion.div>
       )}
 
@@ -252,110 +249,90 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <motion.button
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsFavorite(!isFavorite)}
-        className="absolute top-4 left-4 z-20 p-2 glass rounded-full"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsFavorite(!isFavorite);
+        }}
+        className="absolute top-4 left-4 z-20 p-2 glass rounded-full hover:bg-white/10 transition-colors"
       >
         <Heart 
           className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'} transition-colors`}
         />
       </motion.button>
 
-      {/* Rating */}
-      <div className="absolute top-16 left-4 z-20 flex items-center space-x-1 glass px-2 py-1 rounded-full">
-        <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-        <span className="text-xs font-bold text-gray-700">{product.rating}</span>
-      </div>
-
       {/* Product Image */}
       <motion.div
         animate={{ 
-          scale: isHovered ? 1.1 : 1,
-          rotateZ: isHovered ? [0, -2, 2, 0] : 0
+          scale: isHovered ? 1.05 : 1,
+          y: isHovered ? -5 : 0
         }}
-        transition={{ duration: 0.5 }}
-        className="relative w-full h-64 mb-6 bg-gradient-to-br from-orange-900/30 to-amber-900/30 rounded-xl overflow-hidden border border-orange-500/20"
+        transition={{ duration: 0.4 }}
+        className="relative w-full h-64 mb-6 rounded-2xl overflow-hidden shadow-2xl"
         style={{ transform: "translateZ(20px)" }}
       >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover opacity-90"
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Use real image when available:
-        <Image
-          src={product.realImage || product.image}
-          alt={product.name}
-          fill
-          className="object-cover"
-        />
-        */}
         
-        {/* Shine effect */}
-        {isHovered && (
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-            initial={{ x: "-100%" }}
-            animate={{ x: "100%" }}
-            transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 1 }}
-          />
-        )}
+        {/* Rating Badge */}
+        <div className="absolute bottom-3 left-3 z-20 flex items-center space-x-1 glass px-2 py-1 rounded-lg border border-white/10">
+          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+          <span className="text-xs font-bold text-white">{product.rating}</span>
+        </div>
       </motion.div>
 
       {/* Product Info */}
-      <div className="space-y-4 relative" style={{ transform: "translateZ(10px)" }}>
+      <div className="space-y-4 relative flex-1 flex flex-col" style={{ transform: "translateZ(10px)" }}>
         <div>
-          <div className="text-xs font-semibold text-orange-400 mb-1 uppercase tracking-wider">
+          <div className="text-xs font-bold text-orange-400 mb-2 uppercase tracking-wider flex items-center gap-2">
+            <span className="w-1 h-1 rounded-full bg-orange-400" />
             {product.category}
           </div>
-          <h3 className="text-2xl font-black text-white mb-2">
+          <h3 className="text-2xl font-black text-white mb-2 group-hover:text-orange-400 transition-colors">
             {product.name}
           </h3>
         </div>
         
-        <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
           {product.description}
         </p>
 
         {/* Benefits */}
-        <div className="flex flex-wrap gap-2">
-          {product.benefits.map((benefit, i) => (
-            <motion.span
+        <div className="flex flex-wrap gap-2 pt-2">
+          {product.benefits.slice(0, 2).map((benefit, i) => (
+            <span
               key={i}
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 + i * 0.1 }}
-              className="text-xs px-2 py-1 bg-orange-500/20 text-orange-400 rounded-full font-medium flex items-center space-x-1 border border-orange-500/30"
+              className="text-[10px] px-2 py-1 bg-white/5 text-gray-300 rounded-md font-medium border border-white/5"
             >
-              <Check className="w-3 h-3" />
-              <span>{benefit}</span>
-            </motion.span>
+              {benefit}
+            </span>
           ))}
         </div>
 
+        <div className="flex-1" />
+
         {/* Price and Action */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+        <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-4">
           <div>
-            <span className="text-xs text-gray-500 block">Starting at</span>
-            <p className="text-3xl font-black text-gradient">
-              LKR {product.price}
+            <span className="text-xs text-gray-500 block mb-0.5">Price per 250g</span>
+            <p className="text-2xl font-black text-white">
+              <span className="text-sm text-orange-500 mr-1">LKR</span>
+              {product.price}
             </p>
-            <span className="text-xs text-gray-500">per 250g</span>
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl hover:shadow-2xl hover:shadow-orange-300/50 transition-all group relative overflow-hidden"
+            className="p-3 bg-white text-black rounded-xl hover:bg-orange-400 hover:text-white transition-colors shadow-lg group/btn"
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-              animate={{ x: isHovered ? ["-100%", "100%"] : "-100%" }}
-              transition={{ duration: 0.8, repeat: isHovered ? Infinity : 0, repeatDelay: 0.5 }}
-            />
-            <ShoppingCart className="w-6 h-6 text-white relative z-10" />
+            <ShoppingCart className="w-5 h-5" />
           </motion.button>
         </div>
       </div>

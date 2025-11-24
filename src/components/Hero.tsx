@@ -1,271 +1,191 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Leaf, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Leaf, Sparkles, Star, Play } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [particles, setParticles] = useState<{ x: number; y: number; delay: number; duration: number; color: string }[]>([]);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  useEffect(() => {
+    // Generate particles only on client-side to prevent hydration mismatch
+    const newParticles = Array.from({ length: 25 }).map((_, i) => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 2,
+      duration: Math.random() * 10 + 10,
+      color: i % 3 === 0 ? 'bg-orange-500' : i % 3 === 1 ? 'bg-amber-500' : 'bg-green-500'
+    }));
+    setParticles(newParticles);
+  }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Dark Background with animated gradients */}
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Dynamic Background */}
       <div className="absolute inset-0 bg-black">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-black to-green-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-950/40 via-black to-green-950/40" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay" />
+        
         <motion.div 
           style={{ y, opacity }}
           className="absolute inset-0"
         >
-          {/* Glowing particles */}
-          {[...Array(20)].map((_, i) => (
+          {particles.map((p, i) => (
             <motion.div
               key={i}
-              className={`absolute w-2 h-2 rounded-full ${
-                i % 4 === 0 ? 'bg-orange-500' :
-                i % 4 === 1 ? 'bg-green-500' :
-                i % 4 === 2 ? 'bg-yellow-500' :
-                'bg-emerald-500'
-              } opacity-40 blur-sm`}
+              className={`absolute w-1.5 h-1.5 rounded-full ${p.color} opacity-30 blur-[1px]`}
               animate={{
                 y: [0, -100, 0],
-                x: [0, Math.random() * 100 - 50, 0],
-                scale: [1, 2, 1],
-                opacity: [0.4, 0.8, 0.4],
+                x: [0, Math.random() * 50 - 25, 0],
+                opacity: [0.2, 0.6, 0.2],
+                scale: [1, 1.5, 1],
               }}
               transition={{
-                duration: Math.random() * 5 + 5,
+                duration: p.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: p.delay,
+                ease: "linear"
               }}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${p.x}%`,
+                top: `${p.y}%`,
               }}
             />
           ))}
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="space-y-8 relative"
           >
+            {/* Badge */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg border-2 border-orange-500/30"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full border border-orange-500/20"
             >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <Leaf className="w-5 h-5 text-orange-400" />
-              </motion.div>
-              <span className="text-sm font-semibold text-orange-200">100% Organic & Fresh</span>
-              <Sparkles className="w-4 h-4 text-yellow-400" />
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+              <span className="text-sm font-medium text-gray-300">#1 Premium Mushroom Supplier</span>
             </motion.div>
 
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight drop-shadow-2xl"
-            >
-              Discover
-              <motion.span 
-                className="block text-gradient-nature"
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 5, repeat: Infinity }}
-                style={{ backgroundSize: "200% auto" }}
-              >
-                Royal Mushrooms
-              </motion.span>
-              <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Nature's Finest</span>
-            </motion.h1>
+            <div className="space-y-4">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tight">
+                Nature's
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400 pb-4">
+                  Hidden Gold
+                </span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-xl border-l-2 border-orange-500/30 pl-6">
+                Unlock the power of premium organic fungi. Sustainably harvested from pristine forests, delivered fresh to elevate your culinary and wellness journey.
+              </p>
+            </div>
 
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl"
-            >
-              Experience the extraordinary world of premium mushrooms. 
-              Hand-picked, sustainably grown, and delivered fresh to your door. 
-              From exotic varieties to culinary classics.
-            </motion.p>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
-            >
+            <div className="flex flex-col sm:flex-row gap-5 pt-4">
               <Link href="/products">
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(251, 146, 60, 0.4)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-5 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 text-white rounded-2xl font-bold shadow-2xl transition-all flex items-center justify-center space-x-3 group relative overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl font-bold shadow-lg shadow-orange-900/20 flex items-center justify-center space-x-2 group relative overflow-hidden"
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  />
-                  <span className="relative z-10">Explore Collection</span>
-                  <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  <span className="relative">Shop Collection</span>
+                  <ArrowRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </Link>
 
-              <Link href="/consultation">
+              <div className="flex items-center gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-10 py-5 bg-white text-gray-900 rounded-2xl font-bold border-2 border-orange-300 hover:border-orange-500 hover:bg-orange-50 transition-all shadow-lg"
+                  className="w-12 h-12 rounded-full glass flex items-center justify-center group border border-white/10"
                 >
-                  Book Consultation
+                  <Play className="w-5 h-5 text-white fill-white group-hover:text-orange-400 group-hover:fill-orange-400 transition-colors" />
                 </motion.button>
-              </Link>
-            </motion.div>
+                <span className="text-sm font-medium text-gray-400">Watch Our Story</span>
+              </div>
+            </div>
 
-            {/* Stats */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="flex gap-8 pt-8"
-            >
+            {/* Trust Stats */}
+            <div className="pt-8 border-t border-white/5 grid grid-cols-3 gap-8">
               {[
-                { value: "500+", label: "Happy Customers" },
-                { value: "15+", label: "Varieties" },
-                { value: "100%", label: "Organic" }
+                { label: "Organic", value: "100%" },
+                { label: "Varieties", value: "25+" },
+                { label: "Farmers", value: "50+" },
               ].map((stat, i) => (
-                <motion.div 
-                  key={i}
-                  whileHover={{ scale: 1.1 }}
-                  className="text-center"
-                >
-                  <div className="text-3xl font-black text-gradient">{stat.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
-                </motion.div>
+                <div key={i}>
+                  <div className="text-2xl font-bold text-white">{stat.value}</div>
+                  <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Right - Enhanced Visual */}
+          {/* Right Visual */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="relative"
+            transition={{ duration: 1.2, delay: 0.2, type: "spring" }}
+            className="relative hidden lg:block"
           >
-            <MushroomShowcase />
+            <div className="relative z-10 animate-float">
+              <div className="relative w-full aspect-square max-w-lg mx-auto">
+                {/* Main Image Container */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-[2rem] rotate-6 blur-2xl" />
+                <div className="relative h-full w-full glass-strong rounded-[2rem] p-4 border border-white/10 overflow-hidden">
+                  <Image
+                    src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=80"
+                    alt="Premium Mushrooms"
+                    fill
+                    className="object-cover rounded-2xl"
+                    priority
+                  />
+                  
+                  {/* Floating Elements */}
+                  <motion.div 
+                    animate={{ y: [0, -15, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-8 right-8 glass px-4 py-2 rounded-xl flex items-center gap-2 shadow-xl"
+                  >
+                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    <span className="text-xs font-bold text-white">Premium Grade</span>
+                  </motion.div>
+
+                  <motion.div 
+                    animate={{ y: [0, 15, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-8 left-8 glass px-4 py-2 rounded-xl flex items-center gap-2 shadow-xl"
+                  >
+                    <Leaf className="w-4 h-4 text-green-400" />
+                    <span className="text-xs font-bold text-white">Fresh Harvest</span>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ delay: 1.5, duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <div className="w-6 h-10 border-2 border-green-400 rounded-full flex justify-center">
-          <motion.div 
-            className="w-1.5 h-3 bg-green-500 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
     </section>
-  );
-}
-
-function MushroomShowcase() {
-  return (
-    <div className="relative">
-      {/* Main showcase card */}
-      <motion.div 
-        className="relative glass rounded-3xl p-8 shadow-2xl overflow-hidden"
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-green-500/10 to-teal-500/10" />
-        
-        {/* Hero Mushroom Image - Real Photo */}
-        <motion.div 
-          className="relative w-full h-96 mb-6 rounded-2xl overflow-hidden bg-gradient-to-br from-orange-100 to-amber-100"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=80"
-            alt="Premium Royal Mushrooms"
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-
-        {/* Feature highlights */}
-        <div className="relative z-10 space-y-4">
-          {[
-            { icon: Star, text: "Premium Quality", color: "text-orange-500" },
-            { icon: Leaf, text: "100% Organic", color: "text-green-500" },
-            { icon: Sparkles, text: "Fresh Daily", color: "text-amber-500" }
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 + i * 0.1 }}
-              className="flex items-center space-x-3 glass px-4 py-3 rounded-xl"
-            >
-              <item.icon className={`w-5 h-5 ${item.color}`} />
-              <span className="font-semibold text-gray-700">{item.text}</span>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Floating badges */}
-      <motion.div
-        className="absolute -top-6 -right-6 glass px-6 py-4 rounded-2xl shadow-xl"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      >
-        <div className="text-3xl font-black text-gradient">🍄</div>
-        <div className="text-xs font-bold text-gray-600 mt-1">Fresh</div>
-      </motion.div>
-
-      <motion.div
-        className="absolute -bottom-6 -left-6 glass px-6 py-4 rounded-2xl shadow-xl"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-      >
-        <div className="text-2xl font-black text-gradient-gold">★</div>
-        <div className="text-xs font-bold text-gray-600 mt-1">Premium</div>
-      </motion.div>
-    </div>
   );
 }

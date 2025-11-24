@@ -22,15 +22,15 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'glass shadow-lg backdrop-blur-xl border-b border-white/20' 
-          : 'bg-white/80 backdrop-blur-md border-b border-gray-100'
+          ? 'glass-strong shadow-2xl border-b border-white/5 py-2' 
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <motion.div
@@ -38,21 +38,21 @@ export default function Navbar() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-              <div className="relative p-2 bg-gradient-to-r from-orange-600 to-amber-600 rounded-full">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+              <div className="relative p-2.5 bg-gradient-to-r from-orange-600 to-amber-600 rounded-full shadow-lg border border-white/10">
                 <Leaf className="w-6 h-6 text-white" />
               </div>
             </motion.div>
-            <div>
-              <span className="text-2xl font-black bg-gradient-to-r from-orange-500 via-amber-500 to-green-500 bg-clip-text text-transparent">
+            <div className="flex flex-col">
+              <span className="text-2xl font-black bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent tracking-tight">
                 Royal Mushrooms
               </span>
-              <div className="text-xs text-orange-400 font-semibold">Premium & Organic</div>
+              <span className="text-[10px] font-bold text-orange-400 tracking-widest uppercase">Premium & Organic</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1 bg-white/5 backdrop-blur-md rounded-full px-2 py-1 border border-white/5">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/products">Products</NavLink>
             <NavLink href="/consultation">Consultation</NavLink>
@@ -60,38 +60,23 @@ export default function Navbar() {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Search */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="hidden md:block p-2.5 hover:bg-gray-100 rounded-xl transition-all"
-            >
-              <Search className="w-5 h-5 text-gray-700" />
-            </motion.button>
-
-            {/* User */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="hidden md:block p-2.5 hover:bg-gray-100 rounded-xl transition-all"
-            >
-              <User className="w-5 h-5 text-gray-700" />
-            </motion.button>
-
+          <div className="flex items-center space-x-3">
+            <NavIcon icon={Search} />
+            <NavIcon icon={User} />
+            
             {/* Cart */}
             <Link href="/cart">
               <motion.div 
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative p-2.5 hover:bg-gray-100 rounded-xl transition-all cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative p-3 hover:bg-white/10 rounded-full transition-all cursor-pointer group"
               >
-                <ShoppingCart className="w-5 h-5 text-gray-700" />
+                <ShoppingCart className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
                 {cartCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-600 to-amber-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-lg"
+                    className="absolute top-0 right-0 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-lg border border-black/50"
                   >
                     {cartCount}
                   </motion.span>
@@ -103,7 +88,7 @@ export default function Navbar() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2.5 hover:bg-gray-100 rounded-xl transition-all"
+              className="md:hidden p-3 hover:bg-white/10 rounded-full transition-all text-gray-300"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
@@ -117,25 +102,13 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden py-6 border-t border-gray-100"
+            className="md:hidden mt-4 py-4 border-t border-white/10 bg-black/90 backdrop-blur-xl rounded-2xl overflow-hidden"
           >
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2 px-4">
               <MobileNavLink href="/">Home</MobileNavLink>
               <MobileNavLink href="/products">Products</MobileNavLink>
               <MobileNavLink href="/consultation">Consultation</MobileNavLink>
               <MobileNavLink href="/membership">Membership</MobileNavLink>
-              
-              {/* Mobile search */}
-              <div className="pt-4 border-t border-gray-100">
-                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
-                  <Search className="w-5 h-5 text-gray-400" />
-                  <input 
-                    type="text" 
-                    placeholder="Search mushrooms..."
-                    className="bg-transparent outline-none text-gray-700 placeholder-gray-400 w-full"
-                  />
-                </div>
-              </div>
             </div>
           </motion.div>
         )}
@@ -150,17 +123,23 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="relative px-4 py-2 text-gray-300 hover:text-orange-400 transition-colors cursor-pointer font-semibold group"
+        className="relative px-5 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors cursor-pointer rounded-full hover:bg-white/10"
       >
         {children}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 origin-left"
-          initial={{ scaleX: 0 }}
-          whileHover={{ scaleX: 1 }}
-          transition={{ duration: 0.3 }}
-        />
       </motion.div>
     </Link>
+  );
+}
+
+function NavIcon({ icon: Icon }: { icon: any }) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
+      whileTap={{ scale: 0.9 }}
+      className="hidden md:block p-3 rounded-full transition-all group"
+    >
+      <Icon className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
+    </motion.button>
   );
 }
 
@@ -168,8 +147,8 @@ function MobileNavLink({ href, children }: { href: string; children: React.React
   return (
     <Link href={href}>
       <motion.div
-        whileHover={{ x: 10 }}
-        className="text-gray-300 hover:text-orange-400 transition-all block py-3 px-4 rounded-xl hover:bg-orange-500/20 font-semibold text-lg"
+        whileHover={{ x: 10, backgroundColor: "rgba(255,255,255,0.05)" }}
+        className="text-gray-300 hover:text-orange-400 transition-all block py-3 px-4 rounded-xl font-medium"
       >
         {children}
       </motion.div>
