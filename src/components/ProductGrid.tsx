@@ -94,21 +94,7 @@ export default function ProductGrid() {
     : products.filter(p => p.category === filter);
 
   return (
-    <section className="py-32 relative overflow-hidden bg-black/50">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-[100px]"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/10 rounded-full blur-[100px]"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-      </div>
-
+    <section className="py-32 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -125,14 +111,14 @@ export default function ProductGrid() {
             transition={{ delay: 0.2, type: "spring" }}
             className="inline-block mb-4"
           >
-            <span className="text-6xl filter drop-shadow-lg">🍄</span>
+            <span className="text-6xl filter drop-shadow-md">🍄</span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-black mb-6 text-white tracking-tight">
-            Our <span className="text-gradient-nature">Premium</span> Collection
+          <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-royal-green">
+            Our <span className="text-royal-gold italic">Premium</span> Collection
           </h2>
           
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Handpicked varieties from sustainable farms. Each mushroom is harvested at peak freshness 
             to deliver exceptional flavor and maximum nutritional benefits.
           </p>
@@ -151,10 +137,10 @@ export default function ProductGrid() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(category)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 ${
                 filter === category
-                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/20'
-                  : 'glass text-gray-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-royal-green text-white shadow-lg shadow-royal-green/20'
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-royal-green'
               }`}
             >
               {category}
@@ -179,19 +165,6 @@ export default function ProductGrid() {
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useTransform(mouseY, [-100, 100], [5, -5]);
-  const rotateY = useTransform(mouseX, [-100, 100], [-5, 5]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    mouseX.set(e.clientX - centerX);
-    mouseY.set(e.clientY - centerY);
-  };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -203,9 +176,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       { 
         duration: 3000,
         style: {
-          background: '#1a1a1a',
+          background: '#1a472a',
           color: '#fff',
-          border: '1px solid #333'
         }
       }
     );
@@ -218,19 +190,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, type: "spring" }}
-      onMouseMove={handleMouseMove}
       onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => {
-        setIsHovered(false);
-        mouseX.set(0);
-        mouseY.set(0);
-      }}
-      style={{ 
-        rotateX: isHovered ? rotateX : 0,
-        rotateY: isHovered ? rotateY : 0,
-        transformStyle: "preserve-3d"
-      }}
-      className="card-premium rounded-3xl p-6 group cursor-pointer relative overflow-hidden h-full flex flex-col"
+      onHoverEnd={() => setIsHovered(false)}
+      className="card-royal rounded-3xl p-6 group cursor-pointer relative overflow-hidden h-full flex flex-col bg-white"
     >
       {/* Premium Badge */}
       {product.premium && (
@@ -238,9 +200,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
-          className="absolute top-4 right-4 z-20 flex items-center space-x-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 px-3 py-1.5 rounded-full shadow-lg border border-yellow-200/20"
+          className="absolute top-4 right-4 z-20 flex items-center space-x-1 bg-royal-gold px-3 py-1.5 rounded-full shadow-lg"
         >
-          <Sparkles className="w-3 h-3 text-white animate-pulse" />
+          <Sparkles className="w-3 h-3 text-white" />
           <span className="text-[10px] font-black text-white tracking-wider">PREMIUM</span>
         </motion.div>
       )}
@@ -253,7 +215,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           e.stopPropagation();
           setIsFavorite(!isFavorite);
         }}
-        className="absolute top-4 left-4 z-20 p-2 glass rounded-full hover:bg-white/10 transition-colors"
+        className="absolute top-4 left-4 z-20 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors shadow-sm"
       >
         <Heart 
           className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'} transition-colors`}
@@ -267,10 +229,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           y: isHovered ? -5 : 0
         }}
         transition={{ duration: 0.4 }}
-        className="relative w-full h-64 mb-6 rounded-2xl overflow-hidden shadow-2xl"
-        style={{ transform: "translateZ(20px)" }}
+        className="relative w-full h-64 mb-6 rounded-2xl overflow-hidden shadow-md"
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
         <Image
           src={product.image}
           alt={product.name}
@@ -280,25 +240,25 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         />
         
         {/* Rating Badge */}
-        <div className="absolute bottom-3 left-3 z-20 flex items-center space-x-1 glass px-2 py-1 rounded-lg border border-white/10">
-          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-          <span className="text-xs font-bold text-white">{product.rating}</span>
+        <div className="absolute bottom-3 left-3 z-20 flex items-center space-x-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+          <Star className="w-3 h-3 fill-royal-gold text-royal-gold" />
+          <span className="text-xs font-bold text-royal-green">{product.rating}</span>
         </div>
       </motion.div>
 
       {/* Product Info */}
-      <div className="space-y-4 relative flex-1 flex flex-col" style={{ transform: "translateZ(10px)" }}>
+      <div className="space-y-4 relative flex-1 flex flex-col">
         <div>
-          <div className="text-xs font-bold text-orange-400 mb-2 uppercase tracking-wider flex items-center gap-2">
-            <span className="w-1 h-1 rounded-full bg-orange-400" />
+          <div className="text-xs font-bold text-royal-gold mb-2 uppercase tracking-wider flex items-center gap-2">
+            <span className="w-1 h-1 rounded-full bg-royal-gold" />
             {product.category}
           </div>
-          <h3 className="text-2xl font-black text-white mb-2 group-hover:text-orange-400 transition-colors">
+          <h3 className="text-2xl font-serif font-bold text-royal-green mb-2 group-hover:text-royal-gold transition-colors">
             {product.name}
           </h3>
         </div>
         
-        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+        <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
           {product.description}
         </p>
 
@@ -307,7 +267,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           {product.benefits.slice(0, 2).map((benefit, i) => (
             <span
               key={i}
-              className="text-[10px] px-2 py-1 bg-white/5 text-gray-300 rounded-md font-medium border border-white/5"
+              className="text-[10px] px-2 py-1 bg-royal-green/5 text-royal-green rounded-md font-bold"
             >
               {benefit}
             </span>
@@ -317,11 +277,11 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="flex-1" />
 
         {/* Price and Action */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-4">
+        <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-4">
           <div>
-            <span className="text-xs text-gray-500 block mb-0.5">Price per 250g</span>
-            <p className="text-2xl font-black text-white">
-              <span className="text-sm text-orange-500 mr-1">LKR</span>
+            <span className="text-xs text-gray-400 block mb-0.5">Price per 250g</span>
+            <p className="text-2xl font-bold text-royal-green">
+              <span className="text-sm text-gray-400 mr-1">LKR</span>
               {product.price}
             </p>
           </div>
@@ -330,7 +290,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-3 bg-white text-black rounded-xl hover:bg-orange-400 hover:text-white transition-colors shadow-lg group/btn"
+            className="p-3 bg-royal-green text-white rounded-xl hover:bg-royal-gold transition-colors shadow-lg group/btn"
           >
             <ShoppingCart className="w-5 h-5" />
           </motion.button>
