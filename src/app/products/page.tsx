@@ -92,24 +92,24 @@ export default function ProductsPage() {
     : allProducts.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50/30 via-white to-green-50/30">
+    <div className="min-h-screen bg-gradient-to-b from-[#faf8f3] via-white to-[#c9d4bc]/30">
       <Navbar />
       
       <main className="pt-32 pb-20 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full opacity-15 blur-3xl"
+            className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/20 rounded-full opacity-15 blur-3xl"
             animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
           <motion.div
-            className="absolute bottom-20 right-10 w-96 h-96 bg-green-300 rounded-full opacity-15 blur-3xl"
+            className="absolute bottom-20 right-10 w-96 h-96 bg-[#1a4d2e]/20 rounded-full opacity-15 blur-3xl"
             animate={{ scale: [1, 1.3, 1], x: [0, -50, 0] }}
             transition={{ duration: 12, repeat: Infinity }}
           />
           <motion.div
-            className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-300 rounded-full opacity-10 blur-3xl"
+            className="absolute top-1/2 left-1/2 w-80 h-80 bg-[#a8b899]/20 rounded-full opacity-10 blur-3xl"
             animate={{ scale: [1, 1.4, 1], rotate: [0, 180, 360] }}
             transition={{ duration: 15, repeat: Infinity }}
           />
@@ -132,7 +132,7 @@ export default function ProductsPage() {
 
           {/* Filters */}
           <div className="flex items-center justify-center space-x-4 mb-12 flex-wrap gap-4">
-            <div className="flex items-center space-x-2 text-orange-600">
+            <div className="flex items-center space-x-2 text-[#1a4d2e]">
               <Filter className="w-5 h-5" />
               <span className="font-semibold">Filter:</span>
             </div>
@@ -144,8 +144,8 @@ export default function ProductsPage() {
                 onClick={() => setFilter(cat)}
                 className={`px-6 py-2 rounded-full font-medium transition-all ${
                   filter === cat
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-300/50'
-                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50'
+                    ? 'bg-gradient-gold text-[#1a4d2e] shadow-lg shadow-[#d4af37]/50'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-[#d4af37] hover:bg-[#faf8f3]'
                 }`}
               >
                 {cat}
@@ -177,11 +177,11 @@ function ProductCard({ product, index }: { product: any; index: number }) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="glass rounded-2xl p-6 group border border-orange-100 hover:border-orange-300 transition-all hover:shadow-xl hover:shadow-orange-100/50"
+      className="glass rounded-2xl p-6 group border border-[#a8b899]/30 hover:border-[#d4af37] transition-all hover:shadow-xl hover:shadow-[#d4af37]/20"
     >
       <motion.div
         whileHover={{ scale: 1.1, rotate: 5 }}
-        className="relative w-full h-32 mb-4 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-2"
+        className="relative w-full h-32 mb-4 bg-gradient-to-br from-[#faf8f3] to-[#f4e4b0] rounded-xl p-2"
       >
         <Image
           src={product.image}
@@ -193,7 +193,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs px-3 py-1 bg-orange-100 rounded-full text-orange-700 font-semibold">
+          <span className="text-xs px-3 py-1 bg-[#a8b899]/20 rounded-full text-[#1a4d2e] font-semibold">
             {product.category}
           </span>
           <div className="flex items-center space-x-1">
@@ -202,7 +202,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
           </div>
         </div>
 
-        <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#1a4d2e] transition-colors">
           {product.name}
         </h3>
         
@@ -218,7 +218,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-3 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full shadow-lg shadow-orange-300/50"
+            className="p-3 bg-gradient-gold rounded-full shadow-lg shadow-[#d4af37]/50"
           >
             <ShoppingCart className="w-5 h-5 text-white" />
           </motion.button>

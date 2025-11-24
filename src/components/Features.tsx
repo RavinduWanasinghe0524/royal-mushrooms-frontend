@@ -22,8 +22,8 @@ const features = [
     icon: Clock,
     title: 'Fresh Daily',
     description: 'Harvested to order',
-    color: 'from-orange-500 to-amber-500',
-    bgColor: 'bg-orange-100',
+    color: 'from-[#d4af37] to-[#b8941f]',
+    bgColor: 'bg-[#f4e4b0]',
   },
   {
     icon: Award,
@@ -50,11 +50,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-24 bg-gradient-to-b from-amber-50/50 via-white to-orange-50/50 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-[#faf8f3]/50 via-white to-[#c9d4bc]/30 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-40 -left-40 w-96 h-96 bg-orange-300 rounded-full opacity-10 blur-3xl"
+          className="absolute -top-40 -left-40 w-96 h-96 bg-[#d4af37]/10 rounded-full opacity-10 blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             rotate: [0, 90, 0]
@@ -139,7 +139,7 @@ export default function Features() {
                   </motion.div>
                 </motion.div>
               
-                <h3 className="text-xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-amber-400 transition-all">
+                <h3 className="text-xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#d4af37] group-hover:to-[#f4e4b0] transition-all">
                   {feature.title}
                 </h3>
               

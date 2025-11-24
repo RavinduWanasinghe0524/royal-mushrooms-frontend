@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote, User } from 'lucide-react';
 import Image from 'next/image';
 
 const testimonials = [
@@ -106,13 +106,8 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center justify-center gap-4">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-[#d4af37]/30">
-                  <Image
-                    src={testimonials[current].image}
-                    alt={testimonials[current].name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-[#d4af37]/30 flex items-center justify-center bg-gradient-gold">
+                  <User className="w-8 h-8 text-[#1a4d2e]" />
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-lg text-[#1a4d2e]">
