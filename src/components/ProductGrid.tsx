@@ -25,7 +25,7 @@ const products: Product[] = [
     name: 'Forest Shiitake',
     description: 'Rich, umami flavor with meaty texture. Perfect for stir-fries, soups, and Asian cuisine. Packed with vitamin D and antioxidants.',
     price: 899,
-    image: 'https://images.unsplash.com/photo-1602529480436-d0ca3d6e3a5a?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1621855416886-5c42503a60a1?w=800&q=80',
     category: 'Culinary',
     rating: 4.9,
     benefits: ['Rich in Vitamin D', 'Immune Support', 'Heart Health'],
@@ -35,7 +35,7 @@ const products: Product[] = [
     name: 'Pearl Oyster',
     description: 'Delicate, velvety texture with subtle seafood notes. Ideal for sautéing, grilling, or as a plant-based protein alternative.',
     price: 749,
-    image: 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1595123550441-d377e017de6a?w=800&q=80',
     category: 'Culinary',
     rating: 4.8,
     benefits: ['High Protein', 'Low Calorie', 'Antioxidants'],
@@ -45,7 +45,7 @@ const products: Product[] = [
     name: 'Giant Portobello',
     description: 'Robust, steak-like texture perfect for grilling. Excellent as a burger substitute or stuffed for an elegant main course.',
     price: 999,
-    image: 'https://images.unsplash.com/photo-1565281887431-89d6c6c7a321?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=800&q=80',
     category: 'Culinary',
     rating: 4.7,
     benefits: ['Meaty Texture', 'B Vitamins', 'Minerals'],
@@ -55,7 +55,7 @@ const products: Product[] = [
     name: "Royal Lion's Mane",
     description: "Unique seafood-like texture with incredible cognitive benefits. Known as the 'smart mushroom' for brain health support.",
     price: 1299,
-    image: 'https://images.unsplash.com/photo-1617465124221-0d0fd6dc2c7a?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1627483262268-9c96d8a36740?w=800&q=80',
     premium: true,
     category: 'Medicinal',
     rating: 5.0,
@@ -66,7 +66,7 @@ const products: Product[] = [
     name: 'Golden Chanterelles',
     description: 'Fruity aroma with peppery notes. A gourmet treasure for risottos, pasta, and fine dining. Rare and seasonal.',
     price: 1499,
-    image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1604660936396-195b49d974d8?w=800&q=80',
     premium: true,
     category: 'Gourmet',
     rating: 4.9,
@@ -77,7 +77,7 @@ const products: Product[] = [
     name: 'Black Truffle',
     description: 'The pinnacle of luxury fungi. Intense, earthy aroma that transforms any dish. Exclusively for premium members.',
     price: 4999,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1605218427368-35b0160d5c97?w=800&q=80',
     premium: true,
     category: 'Luxury',
     rating: 5.0,
@@ -88,13 +88,12 @@ const products: Product[] = [
 export default function ProductGrid() {
   const [filter, setFilter] = useState<string>('All');
   const categories = ['All', 'Culinary', 'Medicinal', 'Gourmet', 'Luxury'];
-
   const filteredProducts = filter === 'All' 
     ? products 
     : products.filter(p => p.category === filter);
 
   return (
-    <section className="py-32 relative overflow-hidden bg-white">
+    <section className="py-24 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -104,19 +103,11 @@ export default function ProductGrid() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="inline-block mb-4"
-          >
-            <span className="text-6xl filter drop-shadow-md">🍄</span>
-          </motion.div>
-          
-          <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-royal-green">
-            Our <span className="text-royal-gold italic">Premium</span> Collection
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-nature-green">
+            Our <span className="text-orange-500">Exquisite</span> Selection
           </h2>
+          
+          <div className="w-24 h-1 bg-orange-400 mx-auto mb-8 rounded-full" />
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Handpicked varieties from sustainable farms. Each mushroom is harvested at peak freshness 
@@ -139,8 +130,8 @@ export default function ProductGrid() {
               onClick={() => setFilter(category)}
               className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 ${
                 filter === category
-                  ? 'bg-royal-green text-white shadow-lg shadow-royal-green/20'
-                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-royal-green'
+                  ? 'bg-green-600 text-white shadow-lg shadow-green-600/20'
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-green-600'
               }`}
             >
               {category}

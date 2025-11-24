@@ -3,25 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --color-cream: #fcfbf7;
-  --color-green-dark: #1a472a;
-  --color-green-light: #2d5a3f;
-  --color-gold: #c5a059;
-  --color-gold-light: #e5c585;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --color-green-primary: #10b981;
+  /* Vibrant Green */
+  --color-green-dark: #047857;
+  --color-orange-accent: #f59e0b;
+  /* Bright Orange */
+  --color-text-dark: #1f2937;
+  --color-light-bg: #f9fafb;
 }
 
 body {
-  background: var(--color-cream);
-  color: var(--color-green-dark);
+  background: var(--color-light-bg);
+  color: var(--color-text-dark);
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
 }
 
 h1,
@@ -30,125 +24,43 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
+  /* Clean Sans-serif like screenshot */
+  font-weight: 700;
 }
 
 @layer utilities {
-  .text-royal-green {
-    color: var(--color-green-dark);
+  .bg-gradient-nature {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   }
 
-  .text-royal-gold {
-    color: var(--color-gold);
+  .text-nature-green {
+    color: #059669;
   }
 
-  .bg-royal-green {
-    background-color: var(--color-green-dark);
+  .btn-pill {
+    @apply rounded-full px-6 py-2 font-medium transition-all duration-300;
   }
 
-  .bg-royal-cream {
-    background-color: var(--color-cream);
+  .btn-orange {
+    @apply bg-[#f59e0b] text-white hover:bg-[#d97706] shadow-lg shadow-orange-500/20;
   }
 
-  .font-serif {
-    font-family: 'Playfair Display', serif;
-  }
-
-  /* Premium Gradients */
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#c5a059] via-[#e5c585] to-[#c5a059];
-  }
-
-  .bg-gradient-royal {
-    background: linear-gradient(135deg, #1a472a 0%, #0f2b19 100%);
-  }
-
-  /* Glassmorphism - Light Theme */
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 20px rgba(26, 71, 42, 0.05);
-  }
-
-  .glass-dark {
-    background: rgba(26, 71, 42, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Card Styles */
-  .card-royal {
-    background: #ffffff;
-    border: 1px solid rgba(197, 160, 89, 0.1);
-    box-shadow: 0 10px 30px rgba(26, 71, 42, 0.05);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .card-royal:hover {
-    transform: translateY(-5px);
-    border-color: rgba(197, 160, 89, 0.3);
-    box-shadow: 0 20px 40px rgba(26, 71, 42, 0.1);
-  }
-
-  /* Animations */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .btn-green-outline {
+    @apply border-2 border-white text-white hover:bg-white hover:text-green-600;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fcfbf7;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c5a059;
-  border-radius: 5px;
-  border: 2px solid #fcfbf7;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1a472a;
-}
-
-/* Selection Color */
-::selection {
-  background: rgba(197, 160, 89, 0.3);
-  color: #1a472a;
+  background: #10b981;
+  border-radius: 4px;
 }
