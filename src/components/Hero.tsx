@@ -1,80 +1,121 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowRight, Leaf, Sparkles } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Leaf, Sparkles, Star } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRef } from 'react';
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const { scrollY } = useScroll();
+  
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e]/95 via-[#1a4d2e]/85 to-[#0f2919]/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] via-[#0f2919] to-[#0a1f12]" />
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay" />
+        
+        {/* Animated Orbs */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#d4af37]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#1a4d2e]/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"
+        />
       </div>
 
       {/* Floating Particles */}
-      <div className="absolute inset-0 z-1">
-        {[...Array(20)].map((_, i) => (
+      <div className="absolute inset-0 z-1 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-[#d4af37]/30 rounded-full"
+            className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.6, 0.2],
+              y: [0, -100, 0],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 5 + Math.random() * 5,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 5,
+              ease: "easeInOut",
             }}
           />
         ))}
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
+      <motion.div 
+        style={{ y: y1, opacity }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center"
+      >
+        <div className="space-y-8">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-white/90 text-sm font-medium"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[#d4af37]/30 text-[#d4af37] text-sm font-medium tracking-wide uppercase"
           >
-            <Sparkles className="w-4 h-4 text-[#d4af37]" />
-            <span>Premium Organic Cultivations</span>
+            <Sparkles className="w-4 h-4" />
+            <span>Premium Organic Cultivation</span>
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
-          >
-            Nature's Finest
-            <br />
-            <span className="text-gradient-gold inline-block mt-2">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight tracking-tight">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="block"
+            >
+              Nature's Finest
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-gradient-gold inline-block mt-2 relative"
+            >
               Mushroom Kingdom
-            </span>
-          </motion.h1>
+              <motion.svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-[#d4af37] opacity-50"
+                viewBox="0 0 100 10"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ delay: 1, duration: 1.5 }}
+              >
+                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="2" />
+              </motion.svg>
+            </motion.span>
+          </h1>
 
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light"
           >
             Experience the royal standard of organic fungi cultivation. 
             From our forest to your table, discover the extraordinary benefits 
@@ -86,13 +127,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
           >
             <Link href="#products">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212, 175, 55, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-premium group px-8 py-4 bg-[#d4af37] text-[#1a4d2e] font-bold rounded-full text-lg shadow-gold hover:shadow-2xl transition-all flex items-center gap-3"
+                className="btn-premium group px-8 py-4 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full text-lg shadow-gold transition-all flex items-center gap-3"
               >
                 <span>Explore Collection</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -101,9 +142,9 @@ export default function Hero() {
             
             <Link href="/about">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-premium group px-8 py-4 glass text-white font-semibold rounded-full text-lg hover:bg-white/20 transition-all flex items-center gap-3"
+                className="btn-premium group px-8 py-4 glass text-white font-semibold rounded-full text-lg transition-all flex items-center gap-3 border border-white/20"
               >
                 <Leaf className="w-5 h-5" />
                 <span>Our Story</span>
@@ -116,28 +157,36 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="pt-16 flex flex-wrap justify-center gap-8 text-white/70"
+            className="pt-16 flex flex-wrap justify-center gap-12 text-white/70"
           >
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#d4af37]">100%</div>
-              <div className="text-sm">Organic</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#d4af37]">500+</div>
-              <div className="text-sm">Happy Customers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#d4af37]">15+</div>
-              <div className="text-sm">Varieties</div>
-            </div>
+            {[
+              { value: "100%", label: "Organic", icon: Leaf },
+              { value: "500+", label: "Happy Customers", icon: Star },
+              { value: "15+", label: "Varieties", icon: Sparkles },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -5, color: "#d4af37" }}
+                className="text-center group cursor-default"
+              >
+                <div className="flex justify-center mb-2">
+                  <stat.icon className="w-6 h-6 text-[#d4af37] opacity-75 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="text-3xl font-bold text-white group-hover:text-[#d4af37] transition-colors">{stat.value}</div>
+                <div className="text-sm font-medium tracking-wide uppercase opacity-80">{stat.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
       {/* Decorative Bottom Wave */}
-      <div className="absolute bottom-0 left-0 w-full z-10">
+      <motion.div 
+        style={{ y: y2 }}
+        className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
+      >
         <svg
-          className="relative block w-full h-24 md:h-32"
+          className="relative block w-full h-24 md:h-40"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
@@ -146,7 +195,7 @@ export default function Hero() {
             fill="#faf8f3"
           />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 }

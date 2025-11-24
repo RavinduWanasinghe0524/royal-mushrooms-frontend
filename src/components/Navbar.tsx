@@ -12,7 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -24,9 +24,10 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'glass-dark shadow-lg py-4'
+            ? 'glass-dark shadow-premium py-3'
             : 'bg-transparent py-6'
         }`}
       >
@@ -36,12 +37,16 @@ export default function Navbar() {
             <Link href="/">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-3 cursor-pointer"
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center space-x-3 cursor-pointer group"
               >
-                <div className="w-10 h-10 bg-gradient-gold rounded-full flex items-center justify-center shadow-gold">
-                  <Leaf className="w-6 h-6 text-[#1a4d2e]" />
+                <div className="relative w-10 h-10">
+                  <div className="absolute inset-0 bg-gradient-gold rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative w-full h-full bg-gradient-gold rounded-full flex items-center justify-center shadow-gold">
+                    <Leaf className="w-6 h-6 text-[#1a4d2e]" />
+                  </div>
                 </div>
-                <span className="text-2xl font-bold text-white hidden sm:block">
+                <span className={`text-2xl font-bold transition-colors duration-300 ${scrolled ? 'text-white' : 'text-white'}`}>
                   Royal Mushrooms
                 </span>
               </motion.div>
@@ -49,10 +54,10 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <NavLink href="#products">Collection</NavLink>
-              <NavLink href="#benefits">Benefits</NavLink>
-              <NavLink href="#process">Our Process</NavLink>
-              <NavLink href="#testimonials">Reviews</NavLink>
+              <NavLink href="#products" scrolled={scrolled}>Collection</NavLink>
+              <NavLink href="#benefits" scrolled={scrolled}>Benefits</NavLink>
+              <NavLink href="#process" scrolled={scrolled}>Our Process</NavLink>
+              <NavLink href="#testimonials" scrolled={scrolled}>Reviews</NavLink>
             </div>
 
             {/* Right Actions */}
@@ -71,15 +76,15 @@ export default function Navbar() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative flex items-center gap-2 px-5 py-2.5 glass text-white rounded-full hover:bg-white/20 transition-all"
+                  className="relative flex items-center gap-2 px-5 py-2.5 glass text-white rounded-full hover:bg-white/20 transition-all group"
                 >
-                  <ShoppingCart className="w-5 h-5" />
+                  <ShoppingCart className="w-5 h-5 group-hover:text-[#d4af37] transition-colors" />
                   <span className="hidden sm:inline font-medium">Cart</span>
                   {cartCount > 0 && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 w-5 h-5 bg-[#d4af37] text-[#1a4d2e] text-xs font-bold rounded-full flex items-center justify-center"
+                      className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-gold text-[#1a4d2e] text-xs font-bold rounded-full flex items-center justify-center shadow-glow"
                     >
                       {cartCount}
                     </motion.span>
@@ -90,9 +95,9 @@ export default function Navbar() {
               {/* Login Button */}
               <Link href="/login">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212, 175, 55, 0.5)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full shadow-gold hover:shadow-2xl transition-all"
+                  className="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full shadow-gold transition-all"
                 >
                   <User className="w-5 h-5" />
                   <span>Login</span>
@@ -103,7 +108,7 @@ export default function Navbar() {
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden w-10 h-10 flex items-center justify-center rounded-full glass text-white"
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-full glass text-white hover:bg-white/20"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </motion.button>
@@ -115,52 +120,74 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween' }}
-            className="fixed inset-y-0 right-0 z-40 w-full sm:w-80 bg-gradient-forest shadow-2xl md:hidden"
-          >
-            <div className="flex flex-col h-full pt-24 pb-8 px-6">
-              <nav className="flex flex-col space-y-4">
-                <MobileNavLink href="#products" onClick={() => setMobileMenuOpen(false)}>
-                  Collection
-                </MobileNavLink>
-                <MobileNavLink href="#benefits" onClick={() => setMobileMenuOpen(false)}>
-                  Benefits
-                </MobileNavLink>
-                <MobileNavLink href="#process" onClick={() => setMobileMenuOpen(false)}>
-                  Our Process
-                </MobileNavLink>
-                <MobileNavLink href="#testimonials" onClick={() => setMobileMenuOpen(false)}>
-                  Reviews
-                </MobileNavLink>
-                <div className="pt-6 border-t border-white/10">
-                  <Link href="/login">
-                    <button className="w-full py-3 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full">
-                      Login / Sign Up
-                    </button>
-                  </Link>
-                </div>
-              </nav>
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-[#0f2919] shadow-2xl md:hidden border-l border-white/10"
+            >
+              <div className="flex flex-col h-full pt-24 pb-8 px-6 relative overflow-hidden">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1a4d2e]/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+                <nav className="flex flex-col space-y-6 relative z-10">
+                  <MobileNavLink href="#products" onClick={() => setMobileMenuOpen(false)}>
+                    Collection
+                  </MobileNavLink>
+                  <MobileNavLink href="#benefits" onClick={() => setMobileMenuOpen(false)}>
+                    Benefits
+                  </MobileNavLink>
+                  <MobileNavLink href="#process" onClick={() => setMobileMenuOpen(false)}>
+                    Our Process
+                  </MobileNavLink>
+                  <MobileNavLink href="#testimonials" onClick={() => setMobileMenuOpen(false)}>
+                    Reviews
+                  </MobileNavLink>
+                  
+                  <div className="pt-8 border-t border-white/10 space-y-4">
+                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full py-3 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full shadow-gold hover:shadow-glow transition-all">
+                        Login / Sign Up
+                      </button>
+                    </Link>
+                    <Link href="/cart" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full py-3 glass text-white font-medium rounded-full hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                        <ShoppingCart className="w-5 h-5" />
+                        View Cart ({cartCount})
+                      </button>
+                    </Link>
+                  </div>
+                </nav>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, children, scrolled }: { href: string; children: React.ReactNode; scrolled: boolean }) {
   return (
     <Link href={href}>
       <motion.span
         whileHover={{ scale: 1.05 }}
-        className="relative text-white/90 hover:text-white font-medium cursor-pointer group"
+        className={`relative font-medium cursor-pointer group py-2 ${
+          scrolled ? 'text-white/90 hover:text-white' : 'text-white/90 hover:text-white'
+        }`}
       >
         {children}
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#d4af37] group-hover:w-full transition-all duration-300" />
+        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-gold group-hover:w-full transition-all duration-300 ease-out" />
       </motion.span>
     </Link>
   );
@@ -178,10 +205,11 @@ function MobileNavLink({
   return (
     <Link href={href} onClick={onClick}>
       <motion.div
-        whileHover={{ x: 10 }}
-        className="text-white text-xl font-medium py-3 border-b border-white/10 cursor-pointer"
+        whileHover={{ x: 10, color: '#d4af37' }}
+        className="text-white/90 text-xl font-medium py-2 border-b border-white/5 cursor-pointer flex items-center justify-between group"
       >
         {children}
+        <Leaf className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-[#d4af37]" />
       </motion.div>
     </Link>
   );
