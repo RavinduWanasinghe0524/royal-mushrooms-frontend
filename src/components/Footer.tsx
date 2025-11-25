@@ -35,11 +35,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-6 text-[#d4af37]">Explore</h3>
             <ul className="space-y-4">
-              <FooterLink href="#products">Our Collection</FooterLink>
-              <FooterLink href="#benefits">Health Benefits</FooterLink>
-              <FooterLink href="#process">Our Process</FooterLink>
+              <FooterLink href="/products">Our Collection</FooterLink>
+              <FooterLink href="/membership">Membership</FooterLink>
+              <FooterLink href="/consultation">Consultation</FooterLink>
               <FooterLink href="/about">About Us</FooterLink>
-              <FooterLink href="/blog">Mushroom Guide</FooterLink>
+              <FooterLink href="/contact">Contact</FooterLink>
             </ul>
           </div>
 
