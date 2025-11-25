@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Leaf, Heart } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -16,8 +17,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="p-3 bg-gradient-gold rounded-2xl shadow-gold">
-                <Leaf className="w-6 h-6 text-[#1a4d2e]" />
+              <div className="p-2 bg-gradient-gold rounded-2xl shadow-gold overflow-hidden">
+                <Image 
+                  src="/logo.png" 
+                  alt="Royal Mushrooms Logo" 
+                  width={40} 
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <span className="text-2xl font-bold tracking-tight">Royal Mushrooms</span>
             </div>

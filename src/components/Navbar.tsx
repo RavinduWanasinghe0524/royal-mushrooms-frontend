@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, User, Menu, X, Leaf, Search } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,10 +41,17 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center space-x-3 cursor-pointer group"
               >
-                <div className="relative w-10 h-10">
-                  <div className="absolute inset-0 bg-gradient-gold rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="relative w-full h-full bg-gradient-gold rounded-full flex items-center justify-center shadow-gold">
-                    <Leaf className="w-6 h-6 text-[#1a4d2e]" />
+                <div className="relative w-12 h-12">
+                  <div className="absolute inset-0 bg-gradient-gold rounded-full blur opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
+                  <div className="relative w-full h-full rounded-full overflow-hidden shadow-gold">
+                    <Image 
+                      src="/logo.png" 
+                      alt="Royal Mushrooms Logo" 
+                      width={48} 
+                      height={48}
+                      className="object-contain"
+                      priority
+                    />
                   </div>
                 </div>
                 <span className={`text-2xl font-bold transition-colors duration-300 ${scrolled ? 'text-white' : 'text-white'}`}>
