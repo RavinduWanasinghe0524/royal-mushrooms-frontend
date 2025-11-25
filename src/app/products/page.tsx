@@ -14,7 +14,7 @@ const allProducts = [
     name: 'Forest Shiitake',
     description: 'Rich, umami flavor. Perfect for stir-fries and hearty soups.',
     price: 899,
-    image: '/images/shiitake.svg',
+    image: 'https://images.unsplash.com/photo-1598105893725-99c29e0b8e4e?w=400&h=400&fit=crop',
     category: 'Exotic',
     rating: 4.8,
   },
@@ -23,7 +23,7 @@ const allProducts = [
     name: 'Pearl Oyster Mushrooms',
     description: 'Delicate, tender texture with a subtle, savory taste.',
     price: 749,
-    image: '/images/oyster.svg',
+    image: 'https://images.unsplash.com/photo-1603456797018-5a7f7d6a1f4e?w=400&h=400&fit=crop',
     category: 'Gourmet',
     rating: 4.6,
   },
@@ -32,7 +32,7 @@ const allProducts = [
     name: 'Giant Portobello Caps',
     description: 'Meaty, robust flavor. Excellent grilled or roasted.',
     price: 999,
-    image: '/images/portobello.svg',
+    image: 'https://images.unsplash.com/photo-1612428978260-2b902f90b9f3?w=400&h=400&fit=crop',
     category: 'Classic',
     rating: 4.9,
   },
@@ -41,7 +41,7 @@ const allProducts = [
     name: "Royal Lion's Mane",
     description: 'Unique texture with cognitive benefits.',
     price: 1299,
-    image: '/images/shiitake.svg',
+    image: 'https://images.unsplash.com/photo-1617564894976-1f69f29f3784?w=400&h=400&fit=crop',
     category: 'Premium',
     rating: 5.0,
   },
@@ -50,7 +50,7 @@ const allProducts = [
     name: 'Golden Chanterelles',
     description: 'Fruity aroma and peppery undertones.',
     price: 1499,
-    image: '/images/oyster.svg',
+    image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=400&h=400&fit=crop',
     category: 'Premium',
     rating: 4.9,
   },
@@ -59,7 +59,7 @@ const allProducts = [
     name: 'Premium Black Truffle',
     description: 'The crown jewel of fungi.',
     price: 4999,
-    image: '/images/portobello.svg',
+    image: 'https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=400&h=400&fit=crop',
     category: 'Luxury',
     rating: 5.0,
   },
@@ -68,7 +68,7 @@ const allProducts = [
     name: 'White Button Mushrooms',
     description: 'Versatile and mild-flavored classic.',
     price: 499,
-    image: '/images/shiitake.svg',
+    image: 'https://images.unsplash.com/photo-1603456797044-63f3b5d3e00e?w=400&h=400&fit=crop',
     category: 'Classic',
     rating: 4.3,
   },
@@ -77,7 +77,7 @@ const allProducts = [
     name: 'Crimini Mushrooms',
     description: 'Baby portobellos with rich flavor.',
     price: 599,
-    image: '/images/portobello.svg',
+    image: 'https://images.unsplash.com/photo-1608112339946-436d0e6e9728?w=400&h=400&fit=crop',
     category: 'Classic',
     rating: 4.5,
   },
@@ -180,14 +180,14 @@ function ProductCard({ product, index }: { product: any; index: number }) {
       className="glass rounded-2xl p-6 group border border-[#a8b899]/30 hover:border-[#d4af37] transition-all hover:shadow-xl hover:shadow-[#d4af37]/20"
     >
       <motion.div
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        className="relative w-full h-32 mb-4 bg-gradient-to-br from-[#faf8f3] to-[#f4e4b0] rounded-xl p-2"
+        whileHover={{ scale: 1.05 }}
+        className="relative w-full h-48 mb-4 bg-gradient-to-br from-[#faf8f3] to-[#f4e4b0] rounded-xl overflow-hidden"
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-contain"
+          className="object-cover hover:scale-110 transition-transform duration-500"
         />
       </motion.div>
 

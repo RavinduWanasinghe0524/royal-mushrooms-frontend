@@ -23,14 +23,14 @@ export default function CartPage() {
       name: 'Forest Shiitake',
       price: 899,
       quantity: 2,
-      image: '/images/shiitake.svg',
+      image: 'https://images.unsplash.com/photo-1598105893725-99c29e0b8e4e?w=400&h=400&fit=crop',
     },
     {
       id: 2,
       name: 'Pearl Oyster Mushrooms',
       price: 749,
       quantity: 1,
-      image: '/images/oyster.svg',
+      image: 'https://images.unsplash.com/photo-1603456797018-5a7f7d6a1f4e?w=400&h=400&fit=crop',
     },
   ]);
 
@@ -122,12 +122,12 @@ export default function CartPage() {
                       transition={{ delay: index * 0.1 }}
                       className="glass-card rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 group hover:border-royal-gold/30 transition-colors"
                     >
-                      <div className="relative w-32 h-32 flex-shrink-0 bg-gray-50 rounded-xl p-4">
+                      <div className="relative w-32 h-32 flex-shrink-0 bg-gray-50 rounded-xl overflow-hidden">
                         <Image
                           src={item.image}
                           alt={item.name}
                           fill
-                          className="object-contain group-hover:scale-110 transition-transform duration-500"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </div>
                       

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "Royal Mushrooms - Premium Organic Fungi",
@@ -25,13 +26,14 @@ export default function RootLayout({
           toastOptions={{
             duration: 4000,
             style: {
-              background: 'rgba(26, 26, 46, 0.95)',
+              background: 'rgba(26, 77, 46, 0.95)',
               color: '#fff',
-              border: '1px solid rgba(100, 200, 255, 0.3)',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
             },
           }}
         />
         {children}
+        <BackToTop />
       </body>
     </html>
   );

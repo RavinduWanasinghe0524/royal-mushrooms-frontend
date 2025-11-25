@@ -54,10 +54,10 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <NavLink href="#products" scrolled={scrolled}>Collection</NavLink>
-              <NavLink href="#benefits" scrolled={scrolled}>Benefits</NavLink>
-              <NavLink href="#process" scrolled={scrolled}>Our Process</NavLink>
-              <NavLink href="#testimonials" scrolled={scrolled}>Reviews</NavLink>
+              <NavLink href="/products" scrolled={scrolled}>Collection</NavLink>
+              <NavLink href="/membership" scrolled={scrolled}>Membership</NavLink>
+              <NavLink href="/about" scrolled={scrolled}>About</NavLink>
+              <NavLink href="/contact" scrolled={scrolled}>Contact</NavLink>
             </div>
 
             {/* Right Actions */}
@@ -141,17 +141,20 @@ export default function Navbar() {
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1a4d2e]/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
                 <nav className="flex flex-col space-y-6 relative z-10">
-                  <MobileNavLink href="#products" onClick={() => setMobileMenuOpen(false)}>
+                  <MobileNavLink href="/products" onClick={() => setMobileMenuOpen(false)}>
                     Collection
                   </MobileNavLink>
-                  <MobileNavLink href="#benefits" onClick={() => setMobileMenuOpen(false)}>
-                    Benefits
+                  <MobileNavLink href="/membership" onClick={() => setMobileMenuOpen(false)}>
+                    Membership
                   </MobileNavLink>
-                  <MobileNavLink href="#process" onClick={() => setMobileMenuOpen(false)}>
-                    Our Process
+                  <MobileNavLink href="/consultation" onClick={() => setMobileMenuOpen(false)}>
+                    Consultation
                   </MobileNavLink>
-                  <MobileNavLink href="#testimonials" onClick={() => setMobileMenuOpen(false)}>
-                    Reviews
+                  <MobileNavLink href="/about" onClick={() => setMobileMenuOpen(false)}>
+                    About
+                  </MobileNavLink>
+                  <MobileNavLink href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                    Contact
                   </MobileNavLink>
                   
                   <div className="pt-8 border-t border-white/10 space-y-4">
