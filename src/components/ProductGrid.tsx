@@ -147,7 +147,7 @@ export default function ProductGrid() {
   );
 }
 
-function ProductCard({ product, index }: { product: any; index: number }) {
+function ProductCard({ product, index }: { product: typeof products[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -165,6 +165,7 @@ function ProductCard({ product, index }: { product: any; index: number }) {
         <motion.div
           animate={{ scale: isHovered ? 1.1 : 1 }}
           transition={{ duration: 0.5 }}
+          className="relative w-full h-full"
         >
           <Image
             src={product.image}

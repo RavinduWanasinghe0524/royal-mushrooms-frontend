@@ -1,0 +1,224 @@
+
+> royal-mushrooms-frontend@0.1.0 lint
+> eslint
+
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\about\page.tsx
+   71:74  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+   76:31  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  133:39  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  135:38  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  141:79  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  210:17  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  210:55  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\cart\page.tsx
+  100:77  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\consultation\page.tsx
+  121:88  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\contact\page.tsx
+   84:33   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+   84:83   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  253:19   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  253:22   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  253:113  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\layout.tsx
+  24:9  warning  Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged. See: https://nextjs.org/docs/messages/no-page-custom-font  @next/next/no-page-custom-font
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\login\page.tsx
+   65:26  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\login\page.tsx:65:26
+  63 |               className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
+  64 |               style={{
+> 65 |                 left: `${Math.random() * 100}%`,
+     |                          ^^^^^^^^^^^^^ Cannot call impure function
+  66 |                 top: `${Math.random() * 100}%`,
+  67 |               }}
+  68 |               animate={{  react-hooks/purity
+   66:25  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\login\page.tsx:66:25
+  64 |               style={{
+  65 |                 left: `${Math.random() * 100}%`,
+> 66 |                 top: `${Math.random() * 100}%`,
+     |                         ^^^^^^^^^^^^^ Cannot call impure function
+  67 |               }}
+  68 |               animate={{
+  69 |                 y: [0, -100, 0],                                       react-hooks/purity
+   74:31  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\login\page.tsx:74:31
+  72 |               }}
+  73 |               transition={{
+> 74 |                 duration: 5 + Math.random() * 5,
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  75 |                 repeat: Infinity,
+  76 |                 delay: Math.random() * 5,
+  77 |                 ease: "easeInOut",                       react-hooks/purity
+   76:24  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\login\page.tsx:76:24
+  74 |                 duration: 5 + Math.random() * 5,
+  75 |                 repeat: Infinity,
+> 76 |                 delay: Math.random() * 5,
+     |                        ^^^^^^^^^^^^^ Cannot call impure function
+  77 |                 ease: "easeInOut",
+  78 |               }}
+  79 |             />                                           react-hooks/purity
+  185:20  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\membership\page.tsx
+  164:17  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  164:34  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  164:78  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  165:17  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\not-found.tsx
+  48:83   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  48:104  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\products\page.tsx
+  170:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\profile\page.tsx
+    5:8   warning  'Image' is defined but never used         @typescript-eslint/no-unused-vars
+  152:64  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\signup\page.tsx
+   5:10  warning  'User' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  64:26  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\signup\page.tsx:64:26
+  62 |               className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
+  63 |               style={{
+> 64 |                 left: `${Math.random() * 100}%`,
+     |                          ^^^^^^^^^^^^^ Cannot call impure function
+  65 |                 top: `${Math.random() * 100}%`,
+  66 |               }}
+  67 |               animate={{  react-hooks/purity
+  65:25  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\signup\page.tsx:65:25
+  63 |               style={{
+  64 |                 left: `${Math.random() * 100}%`,
+> 65 |                 top: `${Math.random() * 100}%`,
+     |                         ^^^^^^^^^^^^^ Cannot call impure function
+  66 |               }}
+  67 |               animate={{
+  68 |                 y: [0, -100, 0],                                       react-hooks/purity
+  73:31  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\signup\page.tsx:73:31
+  71 |               }}
+  72 |               transition={{
+> 73 |                 duration: 5 + Math.random() * 5,
+     |                               ^^^^^^^^^^^^^ Cannot call impure function
+  74 |                 repeat: Infinity,
+  75 |                 delay: Math.random() * 5,
+  76 |                 ease: "easeInOut",                       react-hooks/purity
+  75:24  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\app\signup\page.tsx:75:24
+  73 |                 duration: 5 + Math.random() * 5,
+  74 |                 repeat: Infinity,
+> 75 |                 delay: Math.random() * 5,
+     |                        ^^^^^^^^^^^^^ Cannot call impure function
+  76 |                 ease: "easeInOut",
+  77 |               }}
+  78 |             />                                           react-hooks/purity
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Benefits.tsx
+  103:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Features.tsx
+  94:19  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Footer.tsx
+    4:73  warning  'Leaf' is defined but never used                                 @typescript-eslint/no-unused-vars
+   32:33  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  123:51  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Hero.tsx
+  55:24  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Hero.tsx:55:24
+  53 |             className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
+  54 |             style={{
+> 55 |               left: `${Math.random() * 100}%`,
+     |                        ^^^^^^^^^^^^^ Cannot call impure function
+  56 |               top: `${Math.random() * 100}%`,
+  57 |             }}
+  58 |             animate={{  react-hooks/purity
+  56:23  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Hero.tsx:56:23
+  54 |             style={{
+  55 |               left: `${Math.random() * 100}%`,
+> 56 |               top: `${Math.random() * 100}%`,
+     |                       ^^^^^^^^^^^^^ Cannot call impure function
+  57 |             }}
+  58 |             animate={{
+  59 |               y: [0, -120, 0],                                       react-hooks/purity
+  64:29  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Hero.tsx:64:29
+  62 |             }}
+  63 |             transition={{
+> 64 |               duration: 6 + Math.random() * 4,
+     |                             ^^^^^^^^^^^^^ Cannot call impure function
+  65 |               repeat: Infinity,
+  66 |               delay: Math.random() * 5,
+  67 |               ease: "easeInOut",                       react-hooks/purity
+  66:22  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Hero.tsx:66:22
+  64 |               duration: 6 + Math.random() * 4,
+  65 |               repeat: Infinity,
+> 66 |               delay: Math.random() * 5,
+     |                      ^^^^^^^^^^^^^ Cannot call impure function
+  67 |               ease: "easeInOut",
+  68 |             }}
+  69 |           />                                           react-hooks/purity
+  98:21  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react/no-unescaped-entities
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Process.tsx
+  71:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\ProductGrid.tsx
+  150:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\ASUS\Desktop\projects\royal-mushrooms-frontend\src\components\Testimonials.tsx
+    6:8   warning  'Image' is defined but never used                                @typescript-eslint/no-unused-vars
+  104:17  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  104:46  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+Γ£û 49 problems (44 errors, 5 warnings)
+

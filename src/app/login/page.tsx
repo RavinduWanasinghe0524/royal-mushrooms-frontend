@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Lock, ArrowRight, ShieldCheck, Leaf } from 'lucide-react';
 import Link from 'next/link';
@@ -13,6 +13,19 @@ export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<'member' | 'admin'>('member');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [particles, setParticles] = useState<{ left: string; top: string; duration: number; delay: number }[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setParticles([...Array(10)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        duration: 5 + Math.random() * 5,
+        delay: Math.random() * 5,
+      })));
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,13 +70,15 @@ export default function LoginPage() {
 
         {/* Floating Particles */}
         <div className="absolute inset-0 z-1 pointer-events-none">
-          {[...Array(10)].map((_, i) => (
+        {/* Floating Particles */}
+        <div className="absolute inset-0 z-1 pointer-events-none">
+          {particles.map((particle, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: particle.left,
+                top: particle.top,
               }}
               animate={{
                 y: [0, -100, 0],
@@ -71,13 +86,14 @@ export default function LoginPage() {
                 scale: [0, 1.5, 0],
               }}
               transition={{
-                duration: 5 + Math.random() * 5,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: particle.delay,
                 ease: "easeInOut",
               }}
             />
           ))}
+        </div>
         </div>
 
         <motion.div 
@@ -182,7 +198,7 @@ export default function LoginPage() {
 
             <div className="mt-8 text-center">
               <p className="text-white/40 text-sm">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="/signup" className="text-[#d4af37] font-bold hover:text-[#f4e4b0] transition-colors">
                   Create Account
                 </Link>

@@ -167,7 +167,7 @@ export default function ProductsPage() {
   );
 }
 
-function ProductCard({ product, index }: { product: any; index: number }) {
+function ProductCard({ product, index }: { product: typeof allProducts[0]; index: number }) {
   const handleAddToCart = () => {
     toast.success(`${product.name} added to cart!`);
   };

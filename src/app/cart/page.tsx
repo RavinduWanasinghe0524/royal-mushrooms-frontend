@@ -97,7 +97,7 @@ export default function CartPage() {
                 <ShoppingCart className="w-12 h-12 text-royal-gold" />
               </div>
               <h2 className="text-3xl font-serif font-bold text-royal-green mb-4">Your cart is empty</h2>
-              <p className="text-gray-600 mb-8 text-lg">Looks like you haven't added any mushrooms yet.</p>
+              <p className="text-gray-600 mb-8 text-lg">Looks like you haven&apos;t added any mushrooms yet.</p>
               <motion.a
                 href="/products"
                 whileHover={{ scale: 1.05 }}

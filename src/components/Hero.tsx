@@ -3,11 +3,24 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Leaf, Sparkles, Star } from 'lucide-react';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Hero() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
+  const [particles, setParticles] = useState<{ left: string; top: string; duration: number; delay: number }[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setParticles([...Array(20)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        duration: 6 + Math.random() * 4,
+        delay: Math.random() * 2,
+      })));
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
   
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
@@ -47,13 +60,13 @@ export default function Hero() {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 z-1 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-[#d4af37] rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: particle.left,
+              top: particle.top,
             }}
             animate={{
               y: [0, -120, 0],
@@ -61,9 +74,9 @@ export default function Hero() {
               scale: [0, 2, 0],
             }}
             transition={{
-              duration: 6 + Math.random() * 4,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: particle.delay,
               ease: "easeInOut",
             }}
           />
@@ -95,7 +108,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="block drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
             >
-              Nature's Finest
+              Nature&apos;s Finest
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 20 }}

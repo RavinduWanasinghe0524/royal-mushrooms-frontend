@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { User, Package, Settings, LogOut, MapPin, CreditCard, Bell } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ProfilePage() {
@@ -149,7 +148,7 @@ export default function ProfilePage() {
   );
 }
 
-function ProfileLink({ icon: Icon, children, active }: { icon: any, children: React.ReactNode, active?: boolean }) {
+function ProfileLink({ icon: Icon, children, active }: { icon: React.ElementType, children: React.ReactNode, active?: boolean }) {
   return (
     <button className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all font-medium ${
       active 

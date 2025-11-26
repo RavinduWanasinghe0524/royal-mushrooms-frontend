@@ -45,7 +45,7 @@ export default function Navbar() {
                   <div className="absolute inset-0 bg-gradient-gold rounded-full blur opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
                   <div className="relative w-full h-full rounded-full overflow-hidden shadow-gold">
                     <Image 
-                      src="/logo.png" 
+                      src="/royal-mushrooms-frontend/logo.png" 
                       alt="Royal Mushrooms Logo" 
                       width={48} 
                       height={48}

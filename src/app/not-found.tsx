@@ -45,7 +45,7 @@ export default function NotFound() {
           <h1 className="text-9xl font-bold text-gradient-gold mb-4">404</h1>
           <h2 className="text-4xl font-serif font-bold text-white mb-4">Page Not Found</h2>
           <p className="text-xl text-white/60 mb-8 max-w-md mx-auto">
-            Oops! Looks like this mushroom has wandered off the path. The page you're looking for doesn't exist.
+            Oops! Looks like this mushroom has wandered off the path. The page you&apos;re looking for doesn&apos;t exist.
           </p>
         </motion.div>
 

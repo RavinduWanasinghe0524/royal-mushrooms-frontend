@@ -81,7 +81,7 @@ export default function ContactPage() {
               <span className="text-gradient-nature">Contact Us</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
             </p>
           </motion.div>
 
@@ -250,7 +250,7 @@ export default function ContactPage() {
 
               <div className="mt-8 pt-8 border-t border-[#a8b899]/30">
                 <p className="text-sm text-gray-600 italic">
-                  "We're committed to providing the best customer experience. Your satisfaction is our priority."
+                  &quot;We&apos;re committed to providing the best customer experience. Your satisfaction is our priority.&quot;
                 </p>
                 <p className="text-sm font-bold text-[#1a4d2e] mt-2">- Royal Mushrooms Team</p>
               </div>

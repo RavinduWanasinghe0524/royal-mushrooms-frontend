@@ -68,7 +68,7 @@ export default function Process() {
   );
 }
 
-function ProcessStep({ step, index }: { step: any; index: number }) {
+function ProcessStep({ step, index }: { step: typeof steps[0]; index: number }) {
   const Icon = step.icon;
   const isEven = index % 2 === 0;
 

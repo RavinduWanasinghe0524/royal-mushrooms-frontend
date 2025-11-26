@@ -118,7 +118,7 @@ export default function ConsultationPage() {
             transition={{ delay: 0.4 }}
             className="glass rounded-2xl p-8 border border-[#a8b899]/20 mb-12"
           >
-            <h2 className="text-3xl font-bold text-[#1a4d2e] mb-6 text-center">What You'll Get</h2>
+            <h2 className="text-3xl font-bold text-[#1a4d2e] mb-6 text-center">What You&apos;ll Get</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {benefits.map((benefit, idx) => (
                 <div key={idx} className="flex items-center gap-3">

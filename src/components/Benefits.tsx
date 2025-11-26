@@ -100,7 +100,7 @@ export default function Benefits() {
   );
 }
 
-function BenefitCard({ benefit, index }: { benefit: any; index: number }) {
+function BenefitCard({ benefit, index }: { benefit: typeof benefits[0]; index: number }) {
   const Icon = benefit.icon;
 
   return (
