@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight, Quote, User } from 'lucide-react';
-import Image from 'next/image';
+
 
 const testimonials = [
   {
@@ -12,7 +12,7 @@ const testimonials = [
     role: 'Wellness Coach',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'The Lion\'s Mane from Royal Mushrooms has completely transformed my mental clarity. I\'ve been recommending it to all my clients!',
+    text: 'The Lion&apos;s Mane from Royal Mushrooms has completely transformed my mental clarity. I&apos;ve been recommending it to all my clients!',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const testimonials = [
     role: 'Professional Chef',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'As a chef, I\'m incredibly picky about ingredients. These mushrooms are the finest I\'ve ever worked with. The flavor and quality are unmatched.',
+    text: 'As a chef, I&apos;m incredibly picky about ingredients. These mushrooms are the finest I&apos;ve ever worked with. The flavor and quality are unmatched.',
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const testimonials = [
     role: 'Entrepreneur',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'I was skeptical at first, but the Cordyceps boost is real. My productivity and stamina have improved dramatically. Can\'t recommend enough!',
+    text: 'I was skeptical at first, but the Cordyceps boost is real. My productivity and stamina have improved dramatically. Can&apos;t recommend enough!',
   },
 ];
 
@@ -99,9 +99,11 @@ export default function Testimonials() {
                 ))}
               </div>
 
+
+
               {/* Text */}
               <p className="text-2xl text-[#4a3428] text-center mb-8 leading-relaxed">
-                "{testimonials[current].text}"
+                &quot;{testimonials[current].text}&quot;
               </p>
 
               {/* Author */}

@@ -161,8 +161,8 @@ export default function MembershipPage() {
             </div>
             <h3 className="text-2xl font-bold text-[#1a4d2e] mb-4">30-Day Money-Back Guarantee</h3>
             <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-              We're confident you'll love being part of our community. If you're not completely satisfied with your membership, 
-              we'll refund your first month - no questions asked.
+              We&apos;re confident you&apos;ll love being part of our community. If you&apos;re not completely satisfied with your membership, 
+              we&apos;ll refund your first month - no questions asked.
             </p>
             <div className="flex justify-center gap-8 text-sm font-medium text-gray-400">
               <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#d4af37]" /> No hidden fees</span>

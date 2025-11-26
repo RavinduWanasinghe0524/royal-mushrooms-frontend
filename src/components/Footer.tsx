@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Leaf, Heart } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Heart } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -29,7 +29,7 @@ export default function Footer() {
               <span className="text-2xl font-bold tracking-tight">Royal Mushrooms</span>
             </div>
             <p className="text-white/80 leading-relaxed">
-              Cultivating nature's finest organic fungi for culinary excellence and holistic wellness since 2015.
+              Cultivating nature&apos;s finest organic fungi for culinary excellence and holistic wellness since 2015.
             </p>
             <div className="flex space-x-4">
               <SocialIcon icon={Facebook} href="https://facebook.com" />
@@ -120,7 +120,7 @@ export default function Footer() {
   );
 }
 
-function SocialIcon({ icon: Icon, href }: { icon: any; href: string }) {
+function SocialIcon({ icon: Icon, href }: { icon: React.ElementType; href: string }) {
   return (
     <motion.a
       href={href}

@@ -91,7 +91,7 @@ export default function Features() {
             The Royal Standard
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            We don't just grow mushrooms; we cultivate excellence. Experience the difference 
+            We don&apos;t just grow mushrooms; we cultivate excellence. Experience the difference 
             of premium quality, sustainable practices, and unmatched service.
           </p>
         </motion.div>
