@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import BackToTop from "@/components/BackToTop";
+import ChatWidget from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
   title: "Royal Mushrooms - Premium Organic Fungi",
@@ -37,6 +38,7 @@ export default function RootLayout({
         />
         {children}
         <BackToTop />
+        <ChatWidget />
       </body>
     </html>
   );
