@@ -88,6 +88,7 @@ export default function Footer() {
                   type="email" 
                   placeholder="Your email address"
                   className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/50 outline-none text-white placeholder-white/50 transition-all"
+                  suppressHydrationWarning
                 />
               </div>
               <motion.button
