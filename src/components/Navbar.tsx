@@ -64,6 +64,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-8">
               <NavLink href="/products" scrolled={scrolled}>Collection</NavLink>
               <NavLink href="/membership" scrolled={scrolled}>Membership</NavLink>
+              <NavLink href="/consultation" scrolled={scrolled}>Consultation</NavLink>
               <NavLink href="/about" scrolled={scrolled}>About</NavLink>
               <NavLink href="/contact" scrolled={scrolled}>Contact</NavLink>
             </div>
