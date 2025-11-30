@@ -50,10 +50,10 @@ const benefits = [
 
 export default function Benefits() {
   return (
-    <section id="benefits" className="py-24 bg-gradient-to-br from-[#1a4d2e] to-[#0f2919] relative overflow-hidden">
+    <section id="benefits" className="py-24 bg-gradient-primary relative overflow-hidden">
       {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-[#d4af37]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#a8b899]/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-64 h-64 bg-[#E8A87C]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#A8C69F]/10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -63,10 +63,10 @@ export default function Benefits() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            The Power of <span className="text-gradient-gold">Mushrooms</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            The Power of <span className="text-[#E8A87C]">Mushrooms</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Discover the scientifically-backed health benefits that have made medicinal mushrooms 
             a cornerstone of wellness for thousands of years
           </p>
@@ -90,7 +90,7 @@ export default function Benefits() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="btn-premium px-10 py-4 bg-gradient-gold text-[#1a4d2e] font-bold rounded-full text-lg shadow-gold hover:shadow-2xl transition-all"
+            className="px-10 py-4 bg-gradient-accent text-white font-semibold rounded-full shadow-accent hover:shadow-glow transition-all"
           >
             Explore Our Collection
           </motion.button>
@@ -109,16 +109,16 @@ function BenefitCard({ benefit, index }: { benefit: typeof benefits[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -10 }}
-      className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500"
+      whileHover={{ y: -5 }}
+      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300"
     >
       {/* Icon */}
       <div className="relative mb-6">
-        <div className="w-16 h-16 bg-gradient-gold rounded-2xl flex items-center justify-center shadow-gold group-hover:shadow-2xl transition-all">
-          <Icon className="w-8 h-8 text-[#1a4d2e]" />
+        <div className="w-16 h-16 bg-gradient-accent rounded-2xl flex items-center justify-center shadow-accent">
+          <Icon className="w-8 h-8 text-white" />
         </div>
         {/* Stat Badge */}
-        <div className="absolute -top-2 -right-2 px-3 py-1 bg-[#d4af37] text-[#1a4d2e] text-xs font-bold rounded-full shadow-lg">
+        <div className="absolute -top-2 -right-2 px-3 py-1 bg-[#E8A87C] text-white text-xs font-bold rounded-full shadow-lg">
           {benefit.stat}
         </div>
       </div>
@@ -127,10 +127,10 @@ function BenefitCard({ benefit, index }: { benefit: typeof benefits[0]; index: n
       <h3 className="text-2xl font-bold text-white mb-3">
         {benefit.title}
       </h3>
-      <p className="text-white/70 mb-4 leading-relaxed">
+      <p className="text-white/90 mb-4 leading-relaxed">
         {benefit.description}
       </p>
-      <div className="text-sm text-[#d4af37] font-medium">
+      <div className="text-sm text-[#E8A87C] font-semibold">
         {benefit.statLabel}
       </div>
     </motion.div>
